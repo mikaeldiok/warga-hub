@@ -89,9 +89,11 @@
                                     @lang('Submit')
                                 </button>
                             </div>
-                            <div class="text-center text-muted m-4">
-                                <small>Belum Punya akun? </small><a href={{route('register')}}><u>DAFTAR DISINI</u></a>
-                            </div>
+                            @if(user_registration())
+                                <div class="text-center text-muted m-4">
+                                    <small>Belum Punya akun? </small><a href={{route('register')}}><u>DAFTAR DISINI</u></a>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>
