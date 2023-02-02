@@ -1,0 +1,27 @@
+{
+    "name": "mikaeldiok/tag-module",
+    "description": "Tag module for Laravel Starter, mikaeldiok/laravel-starter. It can be used with any other Models.",
+    "type": "laravel-module",
+    "version": "v4.0.0",
+    "authors": [
+        {
+            "name": "mikaeldiok",
+            "email": "nasir8891@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Tag\\Providers\\TagServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Tag\\": ""
+        }
+    }
+}

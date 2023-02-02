@@ -1,0 +1,27 @@
+{
+    "name": "mikaeldiok/comment-module",
+    "description": "Comment module for Laravel Starter, mikaeldiok/laravel-starter. It can be used with any other Models. One to many polymorphic relation.",
+    "type": "laravel-module",
+    "version": "v2.0.0",
+    "authors": [
+        {
+            "name": "mikaeldiok",
+            "email": "nasir8891@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Comment\\Providers\\CommentServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Comment\\": ""
+        }
+    }
+}

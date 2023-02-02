@@ -1,0 +1,13 @@
+{
+    "name": "Mkstarter",
+    "alias": "mkstarter",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Mkstarter\\Providers\\MkstarterServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

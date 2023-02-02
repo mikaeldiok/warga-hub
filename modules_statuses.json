@@ -1,0 +1,8 @@
+{
+    "Article": false,
+    "Tag": false,
+    "Comment": false,
+    "Core": true,
+    "School": true,
+    "Mkstarter": true
+}
