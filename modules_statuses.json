@@ -3,6 +3,6 @@
     "Tag": false,
     "Comment": false,
     "Core": false,
-    "Mkstarter": true,
+    "Mkstarter": false,
     "System": true
 }

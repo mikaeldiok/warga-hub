@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mkstarter\Http\Controllers\Backend;
+namespace Modules\System\Http\Controllers\Backend;
 
 use App\Authorizable;
 use App\Http\Controllers\Controller;
@@ -11,36 +11,36 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Log;
-use Modules\Mkstarter\Services\MkdumService;
-use Modules\Mkstarter\DataTables\MkdumsDataTable;
-use Modules\Mkstarter\Http\Requests\Backend\MkdumsRequest;
+use Modules\System\Services\AppsiteService;
+use Modules\System\DataTables\AppsitesDataTable;
+use Modules\System\Http\Requests\Backend\AppsiteRequest;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 
-class MkdumsController extends Controller
+class AppsitesController extends Controller
 {
     use Authorizable;
 
-    protected $mkdumService;
+    protected $appsiteservice;
 
-    public function __construct(MkdumService $mkdumService)
+    public function __construct(AppsiteService $appsiteservice)
     {
         // Page Title
-        $this->module_title = trans('menu.mkstarter.mkdums');
+        $this->module_title = trans('menu.system.appsite');
 
         // module name
-        $this->module_name = 'mkdums';
+        $this->module_name = 'appsites';
 
         // directory path of the module
-        $this->module_path = 'mkdums';
+        $this->module_path = 'appsites';
 
         // module icon
         $this->module_icon = 'fas fa-graduation-cap';
 
         // module model name, path
-        $this->module_model = "Modules\Mkstarter\Entities\Mkdum";
+        $this->module_model = "Modules\System\Entities\Appsite";
 
-        $this->mkdumService = $mkdumService;
+        $this->appsiteservice = $appsiteservice;
     }
 
     /**
@@ -48,7 +48,7 @@ class MkdumsController extends Controller
      *
      * @return Response
      */
-    public function index(MkdumsDataTable $dataTable)
+    public function index(AppsitesDataTable $dataTable)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -61,7 +61,7 @@ class MkdumsController extends Controller
 
         $$module_name = $module_model::paginate();
 
-        return $dataTable->render("mkstarter::backend.$module_path.index",
+        return $dataTable->render("system::backend.$module_path.index",
             compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action')
         );
     }
@@ -82,10 +82,10 @@ class MkdumsController extends Controller
 
         $module_action = 'Create';
 
-        $options = $this->mkdumService->create()->data;
+        $options = $this->appsiteservice->create()->data;
         
         return view(
-            "mkstarter::backend.$module_name.create",
+            "system::backend.$module_name.create",
             compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular','options')
         );
     }
@@ -97,7 +97,7 @@ class MkdumsController extends Controller
      *
      * @return Response
      */
-    public function store(MkdumsRequest $request)
+    public function store(AppsiteRequest $request)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -108,11 +108,11 @@ class MkdumsController extends Controller
 
         $module_action = 'Store';
 
-        $mkdums = $this->mkdumService->store($request);
+        $appsite = $this->appsiteservice->store($request);
 
-        $$module_name_singular = $mkdums->data;
+        $$module_name_singular = $appsite->data;
 
-        if(!$mkdums->error){
+        if(!$appsite->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Added Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -139,9 +139,9 @@ class MkdumsController extends Controller
 
         $module_action = 'Show';
 
-        $mkdums = $this->mkdumService->show($id);
+        $appsite = $this->appsiteservice->show($id);
 
-        $$module_name_singular = $mkdums->data;
+        $$module_name_singular = $appsite->data;
 
         //determine connections
         $connection = config('database.default');
@@ -154,7 +154,7 @@ class MkdumsController extends Controller
             ->paginate();
 
         return view(
-            "mkstarter::backend.$module_name.show",
+            "system::backend.$module_name.show",
             compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "$module_name_singular",'activities','driver')
         );
     }
@@ -177,14 +177,14 @@ class MkdumsController extends Controller
 
         $module_action = 'Edit';
 
-        $mkdums = $this->mkdumService->edit($id);
+        $appsite = $this->appsiteservice->edit($id);
 
-        $$module_name_singular = $mkdums->data;
+        $$module_name_singular = $appsite->data;
 
-        $options = $this->mkdumService->prepareOptions();
+        $options = $this->appsiteservice->prepareOptions();
         
         return view(
-            "mkstarter::backend.$module_name.edit",
+            "system::backend.$module_name.edit",
             compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "$module_name_singular",'options')
         );
     }
@@ -197,7 +197,7 @@ class MkdumsController extends Controller
      *
      * @return Response
      */
-    public function update(MkdumsRequest $request, $id)
+    public function update(AppsiteRequest $request, $id)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -212,11 +212,11 @@ class MkdumsController extends Controller
             'photo'    => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
-        $mkdums = $this->mkdumService->update($request,$id);
+        $appsite = $this->appsiteservice->update($request,$id);
 
-        $$module_name_singular = $mkdums->data;
+        $$module_name_singular = $appsite->data;
 
-        if(!$mkdums->error){
+        if(!$appsite->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Updated Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -243,11 +243,11 @@ class MkdumsController extends Controller
 
         $module_action = 'destroy';
 
-        $mkdums = $this->mkdumService->destroy($id);
+        $appsite = $this->appsiteservice->destroy($id);
 
-        $$module_name_singular = $mkdums->data;
+        $$module_name_singular = $appsite->data;
 
-        if(!$mkdums->error){
+        if(!$appsite->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Deleted Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -275,11 +275,11 @@ class MkdumsController extends Controller
 
         $module_action = 'purge';
 
-        $mkdums = $this->mkdumService->purge($id);
+        $appsite = $this->appsiteservice->purge($id);
 
-        $$module_name_singular = $mkdums->data;
+        $$module_name_singular = $appsite->data;
 
-        if(!$mkdums->error){
+        if(!$appsite->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Deleted Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -305,12 +305,12 @@ class MkdumsController extends Controller
 
         $module_action = 'Trash List';
 
-        $mkdums = $this->mkdumService->trashed();
+        $appsite = $this->appsiteservice->trashed();
 
-        $$module_name = $mkdums->data;
+        $$module_name = $appsite->data;
 
         return view(
-            "mkstarter::backend.$module_name.trash",
+            "system::backend.$module_name.trash",
             compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_name_singular', 'module_action')
         );
     }
@@ -334,11 +334,11 @@ class MkdumsController extends Controller
 
         $module_action = 'Restore';
 
-        $mkdums = $this->mkdumService->restore($id);
+        $appsite = $this->appsiteservice->restore($id);
 
-        $$module_name_singular = $mkdums->data;
+        $$module_name_singular = $appsite->data;
 
-        if(!$mkdums->error){
+        if(!$appsite->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Restored Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -372,11 +372,11 @@ class MkdumsController extends Controller
 
         $module_action = 'Import';
         
-        $mkdums = $this->mkdumService->import($request);
+        $appsite = $this->appsiteservice->import($request);
 
-        $import = $mkdums->data;
+        $import = $appsite->data;
 
-        if(!$mkdums->error){
+        if(!$appsite->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Restored Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -386,11 +386,11 @@ class MkdumsController extends Controller
     }
 
     /**
-     * FOr getting mkdum data via ajax
+     * FOr getting appsite data via ajax
      *
      * @return Response
      */
-    public function get_mkdum(Request $request)
+    public function get_appsite(Request $request)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -401,7 +401,7 @@ class MkdumsController extends Controller
 
         $module_action = 'List';
 
-        $response = $this->mkdumService->get_mkdum($request);
+        $response = $this->appsiteservice->get_appsite($request);
 
         return response()->json($response);
     }

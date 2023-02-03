@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppsiteTable extends Migration
+class CreateAppsitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateAppsiteTable extends Migration
      */
     public function up()
     {
-        Schema::create('appsite', function (Blueprint $table) {
+        Schema::create('appsites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('url');
+            $table->integer('priority');
+            $table->string('category');
             $table->boolean('available');
             $table->timestamps();
             $table->integer('created_by')->unsigned()->nullable();
@@ -32,6 +35,6 @@ class CreateAppsiteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appsite');
+        Schema::dropIfExists('appsites');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Mkstarter\Services;
+namespace Modules\System\Services;
 
-use Modules\Mkstarter\Entities\Core;
+use Modules\System\Entities\Core;
 
 use Exception;
 use Carbon\Carbon;

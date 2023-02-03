@@ -1,4 +1,4 @@
-@extends('mkstarter::frontend.layouts.app')
+@extends('system::frontend.layouts.app')
 
 @section('title') {{ __("Donatur") }} @endsection
 
@@ -14,7 +14,7 @@
                         @csrf
 
                         {{ method_field('POST') }}
-                        @include('mkstarter::frontend.mkdums.filter-form')
+                        @include('system::frontend.appsites.filter-form')
                         <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                         <button class="btn btn-danger-o" id="clearFilter"><i class="fa fa-times"></i>Clear Filter</button>
                     </form>
@@ -24,9 +24,9 @@
         <div class="col-lg-9 mb-5">
             <div class="card bg-white border-light shadow flex-md-row no-gutters p-4">
                 <div class="card-body d-flex flex-column justify-content-between col-auto py-4 px-2">
-                    @if (count($mkdums) > 0)
-                        <section id="mkdums">
-                            @include('mkstarter::frontend.mkdums.mkdums-card-loader')
+                    @if (count($appsite) > 0)
+                        <section id="appsite">
+                            @include('system::frontend.appsites.appsite-card-loader')
                         </section>
                     @endif
                 </div>
@@ -47,8 +47,8 @@
         $('body').on('click', '.pagination a', function(e) {
             e.preventDefault();
 
-            $('#mkdums a').css('color', '#dfecf6');
-            $('#mkdums').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="/images/loading.gif" />');
+            $('#appsite a').css('color', '#dfecf6');
+            $('#appsite').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="/images/loading.gif" />');
 
             var url = $(this).attr('href');  
             getArticles(url);
@@ -59,9 +59,9 @@
             $.ajax({
                 url : url  
             }).done(function (data) {
-                $('#mkdums').html(data);  
+                $('#appsite').html(data);  
             }).fail(function () {
-                alert('Mkdums could not be loaded.');
+                alert('Appsite could not be loaded.');
             });
         }
     });
@@ -71,7 +71,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: "{{route('frontend.mkdums.filterMkdums')}}",
+                url: "{{route('frontend.appsites.filterAppsite')}}",
                 type: "GET",
                 data: null,
                 success: function(response) {
@@ -85,7 +85,7 @@
 
                     $('#year_class').multiselect('refresh');
 
-                    $('#mkdums').html(response);  
+                    $('#appsite').html(response);  
                 }
             });
         });
@@ -133,7 +133,7 @@
                 // $('#submit').html('Please Wait...');
                 // $("#submit").attr("disabled", true);
                 $.ajax({
-                    url: "{{route('frontend.mkdums.filterMkdums')}}",
+                    url: "{{route('frontend.appsites.filterAppsite')}}",
                     type: "GET",
                     data: $('#filterForm').serialize(),
                     success: function(response) {
@@ -141,7 +141,7 @@
                         // $("#submit").attr("disabled", false);
                         // document.getElementById("filterForm").reset();
 
-                        $('#mkdums').html(response);  
+                        $('#appsite').html(response);  
 
                     }
                 });

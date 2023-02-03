@@ -22,7 +22,7 @@
         <div class="form-group">
             <?php
             $field_name = 'name';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>

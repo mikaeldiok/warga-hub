@@ -1,12 +1,12 @@
 @php
-    $status = \Modules\Mkstarter\Services\MkdumService::prepareStatusFilter();
+    $status = \Modules\System\Services\AppsiteService::prepareStatusFilter();
     \Log::debug($status);
     $firstStat = reset($status);
 @endphp
 <script>
 
     $(document).ready(function(){
-        $(document).on('click', 'button.choose-mkdum', function(e){
+        $(document).on('click', 'button.choose-appsite', function(e){
             var ele = $(this);  
             var fireAjax = false;
 
@@ -22,22 +22,22 @@
                 closeOnConfirm: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        callPickMkdum(ele);
+                        callPickAppsite(ele);
                     }
                 });
             }else{
-                callPickMkdum(ele);
+                callPickAppsite(ele);
             }
 
         });
 
-        function callPickMkdum(ele){
+        function callPickAppsite(ele){
                 $.ajax({
                     type: "POST",
-                    url: '{{route("frontend.bookings.pickMkdum")}}',
+                    url: '{{route("frontend.bookings.pickAppsite")}}',
                     data: {
                         "corporation_id" : "{{auth()->user()->corporation->id ?? 0}}",
-                        "mkdum_id" : ele.attr("data-id"),
+                        "appsite_id" : ele.attr("data-id"),
                         "status" : "{{$firstStat}}",
                         "_method":"POST",
                         "_token": "{{ csrf_token() }}"

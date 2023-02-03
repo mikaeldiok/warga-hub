@@ -2,7 +2,7 @@
 
 return [
 
-    'mkstarter_core_code'                => 'Code',
-    'mkstarter_core_name'                => 'Name',
-    'mkstarter_core_value'               => 'Value',
+    'system_core_code'                => 'Code',
+    'system_core_name'                => 'Name',
+    'system_core_value'               => 'Value',
 ];

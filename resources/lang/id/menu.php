@@ -5,9 +5,9 @@ return [
     'registrants'           => 'Pendaftar',
     'message_trackers'      => 'Lacak Pesan',
 
-    'finance' => [
-        'title'             => 'Keuangan',
-        'installments'      => 'Angsuran',
+    'system' => [
+        'title'             => 'System',
+        'appsite'           => 'Website',
     ],
 
     'core' => [

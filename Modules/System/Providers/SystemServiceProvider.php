@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\Mkstarter\Providers;
+namespace Modules\System\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class MkstarterServiceProvider extends ServiceProvider
+class SystemServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Mkstarter';
+    protected $moduleName = 'System';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'mkstarter';
+    protected $moduleNameLower = 'system';
 
     /**
      * Boot the application events.
@@ -31,7 +31,7 @@ class MkstarterServiceProvider extends ServiceProvider
 
         // adding global middleware
         $kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
-        $kernel->pushMiddleware('Modules\Mkstarter\Http\Middleware\GenerateMenus');
+        $kernel->pushMiddleware('Modules\System\Http\Middleware\GenerateMenus');
     }
 
     /**

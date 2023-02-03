@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mkstarter\Entities;
+namespace Modules\System\Entities;
 
 use Auth;
 use DB;
@@ -25,9 +25,9 @@ class Core extends UserModel implements HasMedia
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = "mkstarter_cores";
+    protected $table = "system_cores";
 
-    protected static $logName = 'mkstarter_cores';
+    protected static $logName = 'system_cores';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['name', 'id'];
     
@@ -95,8 +95,8 @@ class Core extends UserModel implements HasMedia
     }
 
     public static function getRawData(String $core_code){
-        $core_data = self::where('mkstarter_core_code', $core_code)->first();
-        $raw_data= explode(",",$core_data->mkstarter_core_value);
+        $core_data = self::where('system_core_code', $core_code)->first();
+        $raw_data= explode(",",$core_data->system_core_value);
 
         return $raw_data;
     }

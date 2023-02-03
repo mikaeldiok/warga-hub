@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Mkstarter\Services;
+namespace Modules\System\Services;
 
-use Modules\Mkstarter\Entities\Core;
-use Modules\Mkstarter\Entities\Mkdum;
+use Modules\System\Entities\Core;
+use Modules\System\Entities\Appsite;
 use Modules\Recruiter\Entities\Booking;
 
 use Exception;
@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Auth;
 
 use ConsoleTVs\Charts\Classes\Echarts\Chart;
-use App\Charts\MkdumPerStatus;
+use App\Charts\AppsitePerStatus;
 use App\Exceptions\GeneralException;
 
 use Illuminate\Support\Facades\DB;
@@ -23,8 +23,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 
-use Modules\Mkstarter\Imports\MkdumsImport;
-use Modules\Mkstarter\Events\MkdumRegistered;
+use Modules\System\Imports\AppsiteImport;
+use Modules\System\Events\AppsiteRegistered;
 
 use App\Events\Backend\UserCreated;
 use App\Events\Backend\UserUpdated;
@@ -32,11 +32,11 @@ use App\Events\Backend\UserUpdated;
 use App\Models\User;
 use App\Models\Userprofile;
 
-class MkdumService{
+class AppsiteService{
 
     public function __construct()
         {        
-        $this->module_title = Str::plural(class_basename(Mkdum::class));
+        $this->module_title = Str::plural(class_basename(Appsite::class));
         $this->module_name = Str::lower($this->module_title);
         
         }
@@ -45,84 +45,84 @@ class MkdumService{
 
         Log::info(label_case($this->module_title.' '.__FUNCTION__).' | User:'.(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
-        $mkdum =Mkdum::query()->orderBy('id','desc')->get();
+        $appsite =Appsite::query()->orderBy('id','desc')->get();
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
     
-    public function getAllMkdums(){
+    public function getAllAppsite(){
 
-        $mkdum =Mkdum::query()->available()->orderBy('id','desc')->get();
+        $appsite =Appsite::query()->available()->orderBy('id','desc')->get();
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
 
-    public function filterMkdums($pagination,$request){
+    public function filterAppsite($pagination,$request){
 
-        $mkdum =Mkdum::query()->available();
+        $appsite =Appsite::query()->available();
 
         if(count($request->all()) > 0){
             if($request->has('major')){
-                $mkdum->whereIn('major', $request->input('major'));
+                $appsite->whereIn('major', $request->input('major'));
             }
 
         }
 
-        $mkdum = $mkdum->paginate($pagination);
+        $appsite = $appsite->paginate($pagination);
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
 
-    public function getPaginatedMkdums($pagination,$request){
+    public function getPaginatedAppsite($pagination,$request){
 
-        $mkdum =Mkdum::query()->available();
+        $appsite =Appsite::query()->available();
 
         if(count($request->all()) > 0){
 
         }
 
-        $mkdum = $mkdum->paginate($pagination);
+        $appsite = $appsite->paginate($pagination);
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
     
-    public function get_mkdum($request){
+    public function get_appsite($request){
 
         $id = $request["id"];
 
-        $mkdum =Mkdum::findOrFail($id);
+        $appsite =Appsite::findOrFail($id);
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
 
     public function getList(){
 
-        $mkdum =Mkdum::query()->orderBy('order','asc')->get();
+        $appsite =Appsite::query()->orderBy('order','asc')->get();
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
 
@@ -147,23 +147,23 @@ class MkdumService{
 
         try {
             
-            $mkdumObject = new Mkdum;
-            $mkdumObject->fill($data);
+            $appsiteObject = new Appsite;
+            $appsiteObject->fill($data);
 
-            $mkdumObjectArray = $mkdumObject->toArray();
+            $appsiteObjectArray = $appsiteObject->toArray();
 
-            $mkdum = Mkdum::create($mkdumObjectArray);
+            $appsite = Appsite::create($appsiteObjectArray);
 
             if ($request->hasFile('photo')) {
-                if ($mkdum->getMedia($this->module_name)->first()) {
-                    $mkdum->getMedia($this->module_name)->first()->delete();
+                if ($appsite->getMedia($this->module_name)->first()) {
+                    $appsite->getMedia($this->module_name)->first()->delete();
                 }
     
-                $media = $mkdum->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
+                $media = $appsite->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
 
-                $mkdum->photo = $media->getUrl();
+                $appsite->photo = $media->getUrl();
 
-                $mkdum->save();
+                $appsite->save();
             }
             
         }catch (Exception $e){
@@ -178,36 +178,36 @@ class MkdumService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__function__)." | '".$mkdum->name.'(ID:'.$mkdum->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__function__)." | '".$appsite->name.'(ID:'.$appsite->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
 
-    public function show($id, $mkdumId = null){
+    public function show($id, $appsiteId = null){
 
         Log::info(label_case($this->module_title.' '.__function__).' | User:'.(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> Mkdum::findOrFail($id),
+            'data'=> Appsite::findOrFail($id),
         );
     }
 
     public function edit($id){
 
-        $mkdum = Mkdum::findOrFail($id);
+        $appsite = Appsite::findOrFail($id);
 
-        Log::info(label_case($this->module_title.' '.__function__)." | '".$mkdum->name.'(ID:'.$mkdum->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__function__)." | '".$appsite->name.'(ID:'.$appsite->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdum,
+            'data'=> $appsite,
         );
     }
 
@@ -219,23 +219,23 @@ class MkdumService{
 
         try{
 
-            $mkdum = new Mkdum;
-            $mkdum->fill($data);
+            $appsite = new Appsite;
+            $appsite->fill($data);
             
-            $updating = Mkdum::findOrFail($id)->update($mkdum->toArray());
+            $updating = Appsite::findOrFail($id)->update($appsite->toArray());
 
-            $updated_mkdum = Mkdum::findOrFail($id);
+            $updated_appsite = Appsite::findOrFail($id);
 
             if ($request->hasFile('photo')) {
-                if ($updated_mkdum->getMedia($this->module_name)->first()) {
-                    $updated_mkdum->getMedia($this->module_name)->first()->delete();
+                if ($updated_appsite->getMedia($this->module_name)->first()) {
+                    $updated_appsite->getMedia($this->module_name)->first()->delete();
                 }
     
-                $media = $updated_mkdum->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
+                $media = $updated_appsite->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
 
-                $updated_mkdum->photo = $media->getUrl();
+                $updated_appsite->photo = $media->getUrl();
 
-                $updated_mkdum->save();
+                $updated_appsite->save();
             }
 
 
@@ -252,12 +252,12 @@ class MkdumService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$updated_mkdum->name.'(ID:'.$updated_mkdum->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$updated_appsite->name.'(ID:'.$updated_appsite->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $updated_mkdum,
+            'data'=> $updated_appsite,
         );
     }
 
@@ -266,9 +266,9 @@ class MkdumService{
         DB::beginTransaction();
 
         try{
-            $mkdums = Mkdum::findOrFail($id);
+            $appsite = Appsite::findOrFail($id);
     
-            $deleted = $mkdums->delete();
+            $deleted = $appsite->delete();
         }catch (Exception $e){
             DB::rollBack();
             Log::critical(label_case($this->module_title.' AT '.Carbon::now().' | Function:'.__FUNCTION__).' | Msg: '.$e->getMessage());
@@ -281,12 +281,12 @@ class MkdumService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$mkdums->name.', ID:'.$mkdums->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$appsite->name.', ID:'.$appsite->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdums,
+            'data'=> $appsite,
         );
     }
 
@@ -297,7 +297,7 @@ class MkdumService{
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> Mkdum::bookingonlyTrashed()->get(),
+            'data'=> Appsite::bookingonlyTrashed()->get(),
         );
     }
 
@@ -306,8 +306,8 @@ class MkdumService{
         DB::beginTransaction();
 
         try{
-            $restoring =  Mkdum::bookingwithTrashed()->where('id',$id)->restore();
-            $mkdums = Mkdum::findOrFail($id);
+            $restoring =  Appsite::bookingwithTrashed()->where('id',$id)->restore();
+            $appsite = Appsite::findOrFail($id);
         }catch (Exception $e){
             DB::rollBack();
             Log::critical(label_case($this->module_title.' AT '.Carbon::now().' | Function:'.__FUNCTION__).' | Msg: '.$e->getMessage());
@@ -320,12 +320,12 @@ class MkdumService{
 
         DB::commit();
 
-        Log::info(label_case(__FUNCTION__)." ".$this->module_title.": ".$mkdums->name.", ID:".$mkdums->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case(__FUNCTION__)." ".$this->module_title.": ".$appsite->name.", ID:".$appsite->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdums,
+            'data'=> $appsite,
         );
     }
 
@@ -333,9 +333,9 @@ class MkdumService{
         DB::beginTransaction();
 
         try{
-            $mkdums = Mkdum::bookingwithTrashed()->findOrFail($id);
+            $appsite = Appsite::bookingwithTrashed()->findOrFail($id);
     
-            $deleted = $mkdums->forceDelete();
+            $deleted = $appsite->forceDelete();
         }catch (Exception $e){
             DB::rollBack();
             Log::critical(label_case($this->module_title.' AT '.Carbon::now().' | Function:'.__FUNCTION__).' | Msg: '.$e->getMessage());
@@ -348,17 +348,17 @@ class MkdumService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$mkdums->name.', ID:'.$mkdums->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$appsite->name.', ID:'.$appsite->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $mkdums,
+            'data'=> $appsite,
         );
     }
 
     public function import(Request $request){
-        $import = Excel::import(new MkdumsImport($request), $request->file('data_file'));
+        $import = Excel::import(new AppsiteImport($request), $request->file('data_file'));
     
         return (object) array(
             'error'=> false,            

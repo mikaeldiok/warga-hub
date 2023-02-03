@@ -75,12 +75,12 @@
 @stop
 
 @push ('after-styles')
-<!-- DataTables Mkstarter and Extensions -->
+<!-- DataTables System and Extensions -->
 <link rel="stylesheet" href="{{ asset('vendor/datatable/datatables.min.css') }}">
 
 @endpush
 
 @push ('after-scripts')
-<!-- DataTables Mkstarter and Extensions -->
+<!-- DataTables System and Extensions -->
 {!! $dataTable->scripts()  !!}
 @endpush

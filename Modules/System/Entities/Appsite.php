@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mkstarter\Entities;
+namespace Modules\System\Entities;
 
 use Auth;
 use DB;
@@ -13,16 +13,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
-use Modules\Mkstarter\Database\factories\MkdumFactory;
+use Modules\System\Database\factories\AppsiteFactory;
 
-class Mkdum extends BaseModel
+class Appsite extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = "mkdums";
+    protected $table = "appsites";
 
-    protected static $logName = 'mkdums';
+    protected static $logName = 'appsites';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['name', 'id'];
 

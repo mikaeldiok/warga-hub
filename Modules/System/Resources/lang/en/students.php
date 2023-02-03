@@ -3,7 +3,7 @@
 return [
 
     'name'                      => 'Nama',
-    'mkdum_id'                => 'Mkdum ID',
+    'appsite_id'                => 'Appsite ID',
     'gender'                    => 'Gender',
     'birth_place'               => 'Birth Place',
     'birth_date'                => 'Birth Date',

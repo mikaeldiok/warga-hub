@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\Mkstarter\DataTables;
+namespace Modules\System\DataTables;
 
 use Carbon\Carbon;
 use Illuminate\Support\HtmlString;
-use Modules\Mkstarter\Services\MkdumService;
-use Modules\Mkstarter\Entities\Mkdum;
+use Modules\System\Services\AppsiteService;
+use Modules\System\Entities\Appsite;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class MkdumsDataTable extends DataTable
+class AppsitesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,11 +20,11 @@ class MkdumsDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function __construct(MkdumService $mkdumService)
+    public function __construct(AppsiteService $appsiteservice)
     {
-        $this->module_name = 'mkdums';
+        $this->module_name = 'appsite';
 
-        $this->mkdumService = $mkdumService;
+        $this->appsiteservice = $appsiteservice;
     }
 
     public function dataTable($query)
@@ -79,13 +79,13 @@ class MkdumsDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Mkdum $model
+     * @param \App\Appsite $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
         $user = auth()->user();
-        $data = Mkdum::query();
+        $data = Appsite::query();
 
         return $this->applyScopes($data);
     }
@@ -99,7 +99,7 @@ class MkdumsDataTable extends DataTable
     {
         $created_at = 2;
         return $this->builder()
-                ->setTableId('mkdums-table')
+                ->setTableId('appsite-table')
                 ->columns($this->getColumns())
                 ->minifiedAjax()
                 ->dom(config('mk-datatables.mk-dom'))
@@ -132,10 +132,10 @@ class MkdumsDataTable extends DataTable
                   ->printable(false)
                   ->addClass('text-center'),
             Column::make('id')->hidden(),
-            Column::make('photo')->title(__("mkstarter::mkdums.photo")),
-            Column::make('name')->title(__("mkstarter::mkdums.name")),
-            Column::make('mkdum_id')->title(__("mkstarter::mkdums.mkdum_id")),
-            Column::make('available')->title(__("mkstarter::mkdums.available")),
+            Column::make('photo')->title(__("system::appsite.photo")),
+            Column::make('name')->title(__("system::appsite.name")),
+            Column::make('appsite_id')->title(__("system::appsite.appsite_id")),
+            Column::make('available')->title(__("system::appsite.available")),
             Column::make('created_at'),
             Column::make('updated_at')->hidden(),
         ];
@@ -148,6 +148,6 @@ class MkdumsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Mkdums_' . date('YmdHis');
+        return 'Appsite_' . date('YmdHis');
     }
 }

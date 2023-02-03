@@ -1,4 +1,4 @@
-@extends('mkstarter::frontend.layouts.app')
+@extends('system::frontend.layouts.app')
 
 @section('title') {{ __("Donatur") }} @endsection
 
@@ -11,51 +11,51 @@
             <div class="card bg-white border-light shadow-soft no-gutters p-4">
                 <div class="row">
                     <div class="col-3">
-                        <img src="{{$mkdum->photo ? asset($mkdum->photo) : asset('img/default-avatar.jpg') }}" class="img-thumbnail img-fluid" alt="Mkdum image">
+                        <img src="{{$appsite->photo ? asset($appsite->photo) : asset('img/default-avatar.jpg') }}" class="img-thumbnail img-fluid" alt="Appsite image">
                     </div>
                     <div class="col-9">
-                        <h2 class="display-5 mt-2" style="font-size:45px"> {{$mkdum->name}} </h2>
+                        <h2 class="display-5 mt-2" style="font-size:45px"> {{$appsite->name}} </h2>
                         @php
-                            $birthdate = Carbon\Carbon::createFromFormat('Y-m-d', $mkdum->birth_date);
+                            $birthdate = Carbon\Carbon::createFromFormat('Y-m-d', $appsite->birth_date);
                             $age = $birthdate->diffInYears(Carbon\Carbon::now());
                         @endphp
                         <h3 class="display-6 mt-2"> {{$age}} Tahun</h3>
-                        <h4 class="display-6 mt-2"> {{$mkdum->major}} - {{$mkdum->year_class}} </h4>
+                        <h4 class="display-6 mt-2"> {{$appsite->major}} - {{$appsite->year_class}} </h4>
                         <table>
                             <tbody>
                                 <tr>
                                     <td class="font-weight-bold">Gender </td>
-                                    <td>: {{$mkdum->gender}}</td>
+                                    <td>: {{$appsite->gender}}</td>
                                 </tr>
                                 <tr>
                                     <td class="font-weight-bold">Agama </td>
-                                    <td>: {{$mkdum->religion}}</td>
+                                    <td>: {{$appsite->religion}}</td>
                                 </tr>
                                 <tr>
                                     <td class="font-weight-bold">TB/BB </td>
-                                    <td>: {{$mkdum->height}} cm / {{$mkdum->weight}} kg</td>
+                                    <td>: {{$appsite->height}} cm / {{$appsite->weight}} kg</td>
                                 </tr>
                                 <tr>
                                     <td class="font-weight-bold">Keahlian </td>
-                                    <td>: {{$mkdum->skills}}</td>
+                                    <td>: {{$appsite->skills}}</td>
                                 </tr>
                                 <tr>
                                     <td class="font-weight-bold">Sertifikasi </td>
-                                    <td>: {{$mkdum->certificate}}</td>
+                                    <td>: {{$appsite->certificate}}</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="my-3">
-                            @if($mkdum->available)
-                                @if($mkdum->checkBookedBy(auth()->user()->corporation->id ?? 0))
-                                    <button class="btn btn-lg btn-danger choose-mkdum" data-id="{{$mkdum->id}}" id="choose-mkdum-{{$mkdum->id}}">BATAL</button>
+                            @if($appsite->available)
+                                @if($appsite->checkBookedBy(auth()->user()->corporation->id ?? 0))
+                                    <button class="btn btn-lg btn-danger choose-appsite" data-id="{{$appsite->id}}" id="choose-appsite-{{$appsite->id}}">BATAL</button>
                                 @else
-                                    <button class="btn btn-lg btn-success choose-mkdum" data-id="{{$mkdum->id}}" id="choose-mkdum-{{$mkdum->id}}">PILIH</button>
+                                    <button class="btn btn-lg btn-success choose-appsite" data-id="{{$appsite->id}}" id="choose-appsite-{{$appsite->id}}">PILIH</button>
                                 @endif
                             @else
                                 <div class="btn-lg btn-secondary-o disabled" id="">Currently Not Available</div>
-                                @if($mkdum->checkBookedBy(auth()->user()->corporation->id ?? 0))
-                                    <button class="btn btn-lg btn-danger choose-mkdum with-warning" data-id="{{$mkdum->id}}" id="choose-mkdum-{{$mkdum->id}}">BATAL</button>
+                                @if($appsite->checkBookedBy(auth()->user()->corporation->id ?? 0))
+                                    <button class="btn btn-lg btn-danger choose-appsite with-warning" data-id="{{$appsite->id}}" id="choose-appsite-{{$appsite->id}}">BATAL</button>
                                 @else
                                     <!--  -->
                                 @endif
@@ -75,6 +75,6 @@
 
 @push ('after-scripts')
 
-@include("mkstarter::frontend.mkdums.dynamic-scripts")
+@include("system::frontend.appsites.dynamic-scripts")
 
 @endpush

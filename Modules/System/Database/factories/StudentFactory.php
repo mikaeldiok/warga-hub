@@ -1,21 +1,21 @@
 <?php
-namespace Modules\Mkstarter\Database\factories;
+namespace Modules\System\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminte\Support\Str;
 use Illuminate\Support\Arr; 
 use Carbon\Carbon;
 
-use Modules\Mkstarter\Entities\Core;
+use Modules\System\Entities\Core;
 
-class MkdumFactory extends Factory
+class AppsiteFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = \Modules\Mkstarter\Entities\Mkdum::class;
+    protected $model = \Modules\System\Entities\Appsite::class;
 
     /**
      * Define the model's default state.
@@ -45,7 +45,7 @@ class MkdumFactory extends Factory
 
         return [
             'name'          => $this->faker->name,
-            'mkdum_id'    => mt_rand(1111111,9999999),
+            'appsite_id'    => mt_rand(1111111,9999999),
             'gender'        => Arr::random(["Laki-laki","Perempuan"]),
             'birth_place'   => $this->faker->country,
             'birth_date'    => $this->faker->dateTimeBetween(),

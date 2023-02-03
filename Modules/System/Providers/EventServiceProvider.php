@@ -1,20 +1,20 @@
 <?php
 
-namespace Modules\Mkstarter\Providers;
+namespace Modules\System\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 //Events
-Use Modules\Mkstarter\Events\MkdumRegistered;
+Use Modules\System\Events\AppsiteRegistered;
 
 //Listeners
-Use Modules\Mkstarter\Listeners\NotifyMkdum;
+Use Modules\System\Listeners\NotifyAppsite;
 
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        MkdumRegistered::class => [
-            NotifyMkdum::class,
+        AppsiteRegistered::class => [
+            NotifyAppsite::class,
         ],
     ];
 }

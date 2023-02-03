@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Mkstarter\DataTables;
+namespace Modules\System\DataTables;
 
 use Carbon\Carbon;
 use Illuminate\Support\HtmlString;
-use Modules\Mkstarter\Services\CoreService;
-use Modules\Mkstarter\Entities\Core;
+use Modules\System\Services\CoreService;
+use Modules\System\Entities\Core;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -120,9 +120,9 @@ class CoresDataTable extends DataTable
                   ->printable(false)
                   ->addClass('text-center'),
             Column::make('id')->hidden(),
-            Column::make('mkstarter_core_code')->title(__("mkstarter::cores.mkstarter_core_code")),
-            Column::make('mkstarter_core_name')->title(__("mkstarter::cores.mkstarter_core_name")),
-            Column::make('mkstarter_core_value')->title(__("mkstarter::cores.mkstarter_core_value")),
+            Column::make('system_core_code')->title(__("system::cores.system_core_code")),
+            Column::make('system_core_name')->title(__("system::cores.system_core_name")),
+            Column::make('system_core_value')->title(__("system::cores.system_core_value")),
             Column::make('created_at'),
             Column::make('updated_at')->hidden(),
         ];

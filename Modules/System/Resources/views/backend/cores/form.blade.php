@@ -2,8 +2,8 @@
     <div class="col-6">
         <div class="form-group">
             <?php
-            $field_name = 'mkstarter_core_code';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'system_core_code';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
@@ -16,8 +16,8 @@
     <div class="col-6">
         <div class="form-group">
             <?php
-            $field_name = 'mkstarter_core_name';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'system_core_name';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
@@ -30,14 +30,14 @@
     <div class="col-12">
         <div class="form-group">
             <?php
-            $field_name = 'mkstarter_core_value';
-            $field_lable = __("mkstarter::$module_name.$field_name")." (Pisahkan dengan ' , ')";
+            $field_name = 'system_core_value';
+            $field_lable = __("system::$module_name.$field_name")." (Pisahkan dengan ' , ')";
             $field_placeholder = $field_lable;
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
             {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-            @if($core->mkstarter_core_code == "recruitment_status")
+            @if($core->system_core_code == "recruitment_status")
             <small class="text-danger">Status yang paling akhir haruslah status yang menujukkan bahwa siswa diterima</small>
             @endif
         </div>

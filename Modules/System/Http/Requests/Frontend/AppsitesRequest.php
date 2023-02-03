@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Mkstarter\Http\Requests\Frontend;
+namespace Modules\System\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MkdumsRequest extends FormRequest
+class AppsiteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

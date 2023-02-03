@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mkstarter\Http\Requests\Backend;
+namespace Modules\System\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -94,7 +94,7 @@
                     @include('backend.includes.show')
 
                     <hr>
-                        @include('mkstarter::backend.includes.activitylog')
+                        @include('system::backend.includes.activitylog')
                     <hr>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mkstarter\Http\Controllers\Backend;
+namespace Modules\System\Http\Controllers\Backend;
 
 use App\Authorizable;
 use App\Http\Controllers\Controller;
@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Log;
-use Modules\Mkstarter\Services\CoreService;
-use Modules\Mkstarter\DataTables\CoresDataTable;
-use Modules\Mkstarter\Http\Requests\Backend\CoresRequest;
+use Modules\System\Services\CoreService;
+use Modules\System\DataTables\CoresDataTable;
+use Modules\System\Http\Requests\Backend\CoresRequest;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 
@@ -26,7 +26,7 @@ class CoresController extends Controller
     public function __construct(CoreService $coreService)
     {
         // Page Title
-        $this->module_title = trans('menu.mkstarter.cores');
+        $this->module_title = trans('menu.system.cores');
 
         // module name
         $this->module_name = 'cores';
@@ -38,7 +38,7 @@ class CoresController extends Controller
         $this->module_icon = 'fas fa-graduation-cap';
 
         // module model name, path
-        $this->module_model = "Modules\Mkstarter\Entities\Core";
+        $this->module_model = "Modules\System\Entities\Core";
 
         $this->coreService = $coreService;
     }
@@ -61,7 +61,7 @@ class CoresController extends Controller
 
         $$module_name = $module_model::paginate();
 
-        return $dataTable->render("mkstarter::backend.$module_path.index",
+        return $dataTable->render("system::backend.$module_path.index",
             compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action')
         );
     }
@@ -108,7 +108,7 @@ class CoresController extends Controller
         $options = $this->coreService->create();
 
         return view(
-            "mkstarter::backend.$module_name.create",
+            "system::backend.$module_name.create",
             compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular')
         );
     }
@@ -177,7 +177,7 @@ class CoresController extends Controller
             ->paginate();
 
         return view(
-            "mkstarter::backend.$module_name.show",
+            "system::backend.$module_name.show",
             compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "$module_name_singular",'activities','driver')
         );
     }
@@ -210,7 +210,7 @@ class CoresController extends Controller
         $core_types = $options['core_types'];
 
         return view(
-            "mkstarter::backend.$module_name.edit",
+            "system::backend.$module_name.edit",
             compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "$module_name_singular",'bank_names','core_types')
         );
     }
@@ -336,7 +336,7 @@ class CoresController extends Controller
         $$module_name = $cores->data;
 
         return view(
-            "mkstarter::backend.$module_name.trash",
+            "system::backend.$module_name.trash",
             compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_name_singular', 'module_action')
         );
     }

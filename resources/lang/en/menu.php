@@ -5,9 +5,9 @@ return [
     'registrants'           => 'Registrants',
     'message_trackers'      => 'Message Trackers',
 
-    'finance' => [
-        'title'             => 'Finance',
-        'installments'      => 'Installments',
+    'system' => [
+        'title'             => 'System',
+        'appsite'           => 'Website',
     ],
 
     'core' => [

@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Mkstarter\Emails;
+namespace Modules\System\Emails;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use Modules\Mkstarter\Entities\Mkdum;
+use Modules\System\Entities\Appsite;
 
 class NotifyRegistration extends Mailable
 {
-    protected $mkdum;
+    protected $appsite;
 
     use Queueable, SerializesModels;
 
@@ -20,9 +20,9 @@ class NotifyRegistration extends Mailable
      *
      * @return void
      */
-    public function __construct(Mkdum $mkdum)
+    public function __construct(Appsite $appsite)
     {
-        $this->mkdum = $mkdum;
+        $this->appsite = $appsite;
     }
 
     /**
@@ -32,8 +32,8 @@ class NotifyRegistration extends Mailable
      */
     public function build()
     {
-        $mkdum = $this->mkdum;
-        return $this->view('mkstarter::email.registration-email')->with('mkdum', $mkdum)
+        $appsite = $this->appsite;
+        return $this->view('system::email.registration-email')->with('appsite', $appsite)
                     ->subject('Notifikasi Pendaftaran Donatur');
     }
 }

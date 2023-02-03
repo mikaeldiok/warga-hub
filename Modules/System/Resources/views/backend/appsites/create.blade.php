@@ -29,7 +29,7 @@
                     <button type="button" class="btn btn-secondary btn-sm ml-1" data-toggle="modal" data-target="#importModal">
                         Import
                     </button>
-                    @include ("mkstarter::backend.$module_name.import")
+                    @include ("system::backend.$module_name.import")
                 </div>
                 <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
                     <a href="{{ route("backend.$module_name.index") }}" class="btn btn-secondary btn-sm ml-1" data-toggle="tooltip" title="{{ $module_title }} List"><i class="fas fa-list-ul"></i> List</a>
@@ -43,9 +43,9 @@
 
         <div class="row mt-4">
             <div class="col">
-                {{ html()->form('POST', route("backend.$module_name.store"))->class('form')->open() }}
+                {{ html()->form('POST', route("backend.$module_name.store"))->class('form')->attributes(['enctype'=>"multipart/form-data"])->open() }}
 
-                @include ("mkstarter::backend.$module_name.form")
+                @include ("system::backend.$module_name.form")
 
                 <div class="row">
                     <div class="col-6">

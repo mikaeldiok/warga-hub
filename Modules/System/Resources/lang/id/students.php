@@ -3,7 +3,7 @@
 return [
 
     'name'                      => 'Nama',
-    'mkdum_id'                => 'NIS/NIM',
+    'appsite_id'                => 'NIS/NIM',
     'gender'                    => 'Jenis Kelamin',
     'birth_place'               => 'Tempat Lahir',
     'birth_date'                => 'Tanggal Lahir',

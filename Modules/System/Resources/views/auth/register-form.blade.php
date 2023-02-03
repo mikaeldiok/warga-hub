@@ -2,8 +2,8 @@
     <div class="col">
         <div class="form-group">
             <?php
-            $field_name = 'mkdum_name';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'appsite_name';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
@@ -16,12 +16,12 @@
     <div class="col-md-5">
         <div class="form-group">
             <?php
-            $field_name = 'mkdum_type';
-            $field_data_id = 'mkdum_type';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'appsite_type';
+            $field_data_id = 'appsite_type';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = __("Select an option");
             $required = "required";
-            $select_options = $mkdum_types;
+            $select_options = $appsite_types;
             ?>
             {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
             {{ html()->select($field_data_id, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
@@ -32,8 +32,8 @@
     <div class="col-6">
         <div class="form-group">
             <?php
-            $field_name = 'mkdum_phone';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'appsite_phone';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
@@ -46,8 +46,8 @@
     <div class="col-12">
         <div class="form-group">
             <?php
-            $field_name = 'mkdum_address';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'appsite_address';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
@@ -61,9 +61,9 @@
     <div class="col-md-8">
         <div class="form-group">
             <?php
-            $field_name = 'mkdum_bank_name';
-            $field_data_id = 'mkdum_bank_name';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'appsite_bank_name';
+            $field_data_id = 'appsite_bank_name';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = __("Select an option");
             $required = "required";
             $select_options = $banks;
@@ -77,8 +77,8 @@
     <div class="col-8">
         <div class="form-group">
             <?php
-            $field_name = 'mkdum_bank_account';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'appsite_bank_account';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
@@ -94,8 +94,8 @@
     <div class="col-12">
         <div class="form-group">
             <?php
-            $field_name = 'mkdum_email';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_name = 'appsite_email';
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
@@ -109,7 +109,7 @@
         <div class="form-group">
             <?php
             $field_name = 'password';
-            $field_lable = __("mkstarter::$module_name.$field_name");
+            $field_lable = __("system::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
