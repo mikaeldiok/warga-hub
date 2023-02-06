@@ -4,7 +4,7 @@ namespace Modules\System\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AppsiteRequest extends FormRequest
+class AppsitesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

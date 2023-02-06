@@ -11,36 +11,36 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Log;
-use Modules\System\Services\AppsiteService;
-use Modules\System\DataTables\AppsitesDataTable;
-use Modules\System\Http\Requests\Backend\AppsitesRequest;
+use Modules\System\Services\GroupService;
+use Modules\System\DataTables\GroupsDataTable;
+use Modules\System\Http\Requests\Backend\GroupsRequest;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 
-class AppsitesController extends Controller
+class GroupsController extends Controller
 {
     use Authorizable;
 
-    protected $appsiteservice;
+    protected $groupservice;
 
-    public function __construct(AppsiteService $appsiteservice)
+    public function __construct(GroupService $groupservice)
     {
         // Page Title
-        $this->module_title = trans('menu.system.appsite');
+        $this->module_title = trans('menu.system.group');
 
         // module name
-        $this->module_name = 'appsites';
+        $this->module_name = 'groups';
 
         // directory path of the module
-        $this->module_path = 'appsites';
+        $this->module_path = 'groups';
 
         // module icon
         $this->module_icon = 'fas fa-graduation-cap';
 
         // module model name, path
-        $this->module_model = "Modules\System\Entities\Appsite";
+        $this->module_model = "Modules\System\Entities\Group";
 
-        $this->appsiteservice = $appsiteservice;
+        $this->groupservice = $groupservice;
     }
 
     /**
@@ -48,7 +48,7 @@ class AppsitesController extends Controller
      *
      * @return Response
      */
-    public function index(AppsitesDataTable $dataTable)
+    public function index(GroupsDataTable $dataTable)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -82,7 +82,7 @@ class AppsitesController extends Controller
 
         $module_action = 'Create';
 
-        $options = $this->appsiteservice->create()->data;
+        $options = $this->groupservice->create()->data;
         
         return view(
             "system::backend.$module_name.create",
@@ -97,7 +97,7 @@ class AppsitesController extends Controller
      *
      * @return Response
      */
-    public function store(AppsitesRequest $request)
+    public function store(GroupsRequest $request)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -108,11 +108,11 @@ class AppsitesController extends Controller
 
         $module_action = 'Store';
 
-        $appsite = $this->appsiteservice->store($request);
+        $group = $this->groupservice->store($request);
 
-        $$module_name_singular = $appsite->data;
+        $$module_name_singular = $group->data;
 
-        if(!$appsite->error){
+        if(!$group->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Added Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -139,9 +139,9 @@ class AppsitesController extends Controller
 
         $module_action = 'Show';
 
-        $appsite = $this->appsiteservice->show($id);
+        $group = $this->groupservice->show($id);
 
-        $$module_name_singular = $appsite->data;
+        $$module_name_singular = $group->data;
 
         //determine connections
         $connection = config('database.default');
@@ -177,11 +177,11 @@ class AppsitesController extends Controller
 
         $module_action = 'Edit';
 
-        $appsite = $this->appsiteservice->edit($id);
+        $group = $this->groupservice->edit($id);
 
-        $$module_name_singular = $appsite->data;
+        $$module_name_singular = $group->data;
 
-        $options = $this->appsiteservice->prepareOptions();
+        $options = $this->groupservice->prepareOptions();
         
         return view(
             "system::backend.$module_name.edit",
@@ -197,7 +197,7 @@ class AppsitesController extends Controller
      *
      * @return Response
      */
-    public function update(AppsitesRequest $request, $id)
+    public function update(GroupsRequest $request, $id)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -212,11 +212,11 @@ class AppsitesController extends Controller
             'photo'    => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
-        $appsite = $this->appsiteservice->update($request,$id);
+        $group = $this->groupservice->update($request,$id);
 
-        $$module_name_singular = $appsite->data;
+        $$module_name_singular = $group->data;
 
-        if(!$appsite->error){
+        if(!$group->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Updated Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -243,11 +243,11 @@ class AppsitesController extends Controller
 
         $module_action = 'destroy';
 
-        $appsite = $this->appsiteservice->destroy($id);
+        $group = $this->groupservice->destroy($id);
 
-        $$module_name_singular = $appsite->data;
+        $$module_name_singular = $group->data;
 
-        if(!$appsite->error){
+        if(!$group->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Deleted Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -275,11 +275,11 @@ class AppsitesController extends Controller
 
         $module_action = 'purge';
 
-        $appsite = $this->appsiteservice->purge($id);
+        $group = $this->groupservice->purge($id);
 
-        $$module_name_singular = $appsite->data;
+        $$module_name_singular = $group->data;
 
-        if(!$appsite->error){
+        if(!$group->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Deleted Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -305,9 +305,9 @@ class AppsitesController extends Controller
 
         $module_action = 'Trash List';
 
-        $appsite = $this->appsiteservice->trashed();
+        $group = $this->groupservice->trashed();
 
-        $$module_name = $appsite->data;
+        $$module_name = $group->data;
 
         return view(
             "system::backend.$module_name.trash",
@@ -334,11 +334,11 @@ class AppsitesController extends Controller
 
         $module_action = 'Restore';
 
-        $appsite = $this->appsiteservice->restore($id);
+        $group = $this->groupservice->restore($id);
 
-        $$module_name_singular = $appsite->data;
+        $$module_name_singular = $group->data;
 
-        if(!$appsite->error){
+        if(!$group->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Restored Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -372,11 +372,11 @@ class AppsitesController extends Controller
 
         $module_action = 'Import';
         
-        $appsite = $this->appsiteservice->import($request);
+        $group = $this->groupservice->import($request);
 
-        $import = $appsite->data;
+        $import = $group->data;
 
-        if(!$appsite->error){
+        if(!$group->error){
             Flash::success('<i class="fas fa-check"></i> '.label_case($module_name_singular).' Data Restored Successfully!')->important();
         }else{
             Flash::error("<i class='fas fa-times-circle'></i> Error When ".$module_action." '".Str::singular($module_title)."'")->important();
@@ -386,11 +386,11 @@ class AppsitesController extends Controller
     }
 
     /**
-     * FOr getting appsite data via ajax
+     * FOr getting group data via ajax
      *
      * @return Response
      */
-    public function get_appsite(Request $request)
+    public function get_group(Request $request)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -401,7 +401,7 @@ class AppsitesController extends Controller
 
         $module_action = 'List';
 
-        $response = $this->appsiteservice->get_appsite($request);
+        $response = $this->groupservice->get_group($request);
 
         return response()->json($response);
     }

@@ -4,7 +4,7 @@ namespace Modules\System\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AppsitesRequest extends FormRequest
+class GroupsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

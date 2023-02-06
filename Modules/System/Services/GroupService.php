@@ -3,15 +3,14 @@
 namespace Modules\System\Services;
 
 use Modules\System\Entities\Core;
-use Modules\System\Entities\Appsite;
 use Modules\System\Entities\Group;
+use Modules\Recruiter\Entities\Booking;
 
 use Exception;
 use Carbon\Carbon;
 use Auth;
 
 use ConsoleTVs\Charts\Classes\Echarts\Chart;
-use App\Charts\AppsitePerStatus;
 use App\Exceptions\GeneralException;
 
 use Illuminate\Support\Facades\DB;
@@ -23,8 +22,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 
-use Modules\System\Imports\AppsiteImport;
-use Modules\System\Events\AppsiteRegistered;
+use Modules\System\Imports\GroupImport;
+use Modules\System\Events\GroupRegistered;
 
 use App\Events\Backend\UserCreated;
 use App\Events\Backend\UserUpdated;
@@ -32,11 +31,11 @@ use App\Events\Backend\UserUpdated;
 use App\Models\User;
 use App\Models\Userprofile;
 
-class AppsiteService{
+class GroupService{
 
     public function __construct()
         {        
-        $this->module_title = Str::plural(class_basename(Appsite::class));
+        $this->module_title = Str::plural(class_basename(Group::class));
         $this->module_name = Str::lower($this->module_title);
         
         }
@@ -45,84 +44,84 @@ class AppsiteService{
 
         Log::info(label_case($this->module_title.' '.__FUNCTION__).' | User:'.(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
-        $appsite =Appsite::query()->orderBy('id','desc')->get();
+        $group =Group::query()->orderBy('id','desc')->get();
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
     
-    public function getAllAppsite(){
+    public function getAllGroup(){
 
-        $appsite =Appsite::query()->available()->orderBy('id','desc')->get();
+        $group =Group::query()->available()->orderBy('id','desc')->get();
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
-    public function filterAppsite($pagination,$request){
+    public function filterGroup($pagination,$request){
 
-        $appsite =Appsite::query()->available();
+        $group =Group::query()->available();
 
         if(count($request->all()) > 0){
             if($request->has('major')){
-                $appsite->whereIn('major', $request->input('major'));
+                $group->whereIn('major', $request->input('major'));
             }
 
         }
 
-        $appsite = $appsite->paginate($pagination);
+        $group = $group->paginate($pagination);
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
-    public function getPaginatedAppsite($pagination,$request){
+    public function getPaginatedGroup($pagination,$request){
 
-        $appsite =Appsite::query()->available();
+        $group =Group::query()->available();
 
         if(count($request->all()) > 0){
 
         }
 
-        $appsite = $appsite->paginate($pagination);
+        $group = $group->paginate($pagination);
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
     
-    public function get_appsite($request){
+    public function get_group($request){
 
         $id = $request["id"];
 
-        $appsite =Appsite::findOrFail($id);
+        $group =Group::findOrFail($id);
         
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
     public function getList(){
 
-        $appsite =Appsite::query()->orderBy('order','asc')->get();
+        $group =Group::query()->orderBy('order','asc')->get();
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
@@ -147,23 +146,23 @@ class AppsiteService{
 
         try {
             
-            $appsiteObject = new Appsite;
-            $appsiteObject->fill($data);
+            $groupObject = new Group;
+            $groupObject->fill($data);
 
-            $appsiteObjectArray = $appsiteObject->toArray();
+            $groupObjectArray = $groupObject->toArray();
 
-            $appsite = Appsite::create($appsiteObjectArray);
+            $group = Group::create($groupObjectArray);
 
             if ($request->hasFile('photo')) {
-                if ($appsite->getMedia($this->module_name)->first()) {
-                    $appsite->getMedia($this->module_name)->first()->delete();
+                if ($group->getMedia($this->module_name)->first()) {
+                    $group->getMedia($this->module_name)->first()->delete();
                 }
     
-                $media = $appsite->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
+                $media = $group->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
 
-                $appsite->photo = $media->getUrl();
+                $group->photo = $media->getUrl();
 
-                $appsite->save();
+                $group->save();
             }
             
         }catch (Exception $e){
@@ -178,36 +177,36 @@ class AppsiteService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__function__)." | '".$appsite->name.'(ID:'.$appsite->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__function__)." | '".$group->name.'(ID:'.$group->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
-    public function show($id, $appsiteId = null){
+    public function show($id, $groupId = null){
 
         Log::info(label_case($this->module_title.' '.__function__).' | User:'.(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> Appsite::findOrFail($id),
+            'data'=> Group::findOrFail($id),
         );
     }
 
     public function edit($id){
 
-        $appsite = Appsite::findOrFail($id);
+        $group = Group::findOrFail($id);
 
-        Log::info(label_case($this->module_title.' '.__function__)." | '".$appsite->name.'(ID:'.$appsite->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__function__)." | '".$group->name.'(ID:'.$group->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
@@ -219,23 +218,23 @@ class AppsiteService{
 
         try{
 
-            $appsite = new Appsite;
-            $appsite->fill($data);
+            $group = new Group;
+            $group->fill($data);
             
-            $updating = Appsite::findOrFail($id)->update($appsite->toArray());
+            $updating = Group::findOrFail($id)->update($group->toArray());
 
-            $updated_appsite = Appsite::findOrFail($id);
+            $updated_group = Group::findOrFail($id);
 
             if ($request->hasFile('photo')) {
-                if ($updated_appsite->getMedia($this->module_name)->first()) {
-                    $updated_appsite->getMedia($this->module_name)->first()->delete();
+                if ($updated_group->getMedia($this->module_name)->first()) {
+                    $updated_group->getMedia($this->module_name)->first()->delete();
                 }
     
-                $media = $updated_appsite->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
+                $media = $updated_group->addMedia($request->file('photo'))->toMediaCollection($this->module_name);
 
-                $updated_appsite->photo = $media->getUrl();
+                $updated_group->photo = $media->getUrl();
 
-                $updated_appsite->save();
+                $updated_group->save();
             }
 
 
@@ -252,12 +251,12 @@ class AppsiteService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$updated_appsite->name.'(ID:'.$updated_appsite->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$updated_group->name.'(ID:'.$updated_group->id.") ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $updated_appsite,
+            'data'=> $updated_group,
         );
     }
 
@@ -266,9 +265,9 @@ class AppsiteService{
         DB::beginTransaction();
 
         try{
-            $appsite = Appsite::findOrFail($id);
+            $group = Group::findOrFail($id);
     
-            $deleted = $appsite->delete();
+            $deleted = $group->delete();
         }catch (Exception $e){
             DB::rollBack();
             Log::critical(label_case($this->module_title.' AT '.Carbon::now().' | Function:'.__FUNCTION__).' | Msg: '.$e->getMessage());
@@ -281,12 +280,12 @@ class AppsiteService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$appsite->name.', ID:'.$appsite->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$group->name.', ID:'.$group->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
@@ -297,7 +296,7 @@ class AppsiteService{
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> Appsite::bookingonlyTrashed()->get(),
+            'data'=> Group::bookingonlyTrashed()->get(),
         );
     }
 
@@ -306,8 +305,8 @@ class AppsiteService{
         DB::beginTransaction();
 
         try{
-            $restoring =  Appsite::bookingwithTrashed()->where('id',$id)->restore();
-            $appsite = Appsite::findOrFail($id);
+            $restoring =  Group::bookingwithTrashed()->where('id',$id)->restore();
+            $group = Group::findOrFail($id);
         }catch (Exception $e){
             DB::rollBack();
             Log::critical(label_case($this->module_title.' AT '.Carbon::now().' | Function:'.__FUNCTION__).' | Msg: '.$e->getMessage());
@@ -320,12 +319,12 @@ class AppsiteService{
 
         DB::commit();
 
-        Log::info(label_case(__FUNCTION__)." ".$this->module_title.": ".$appsite->name.", ID:".$appsite->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case(__FUNCTION__)." ".$this->module_title.": ".$group->name.", ID:".$group->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
@@ -333,9 +332,9 @@ class AppsiteService{
         DB::beginTransaction();
 
         try{
-            $appsite = Appsite::bookingwithTrashed()->findOrFail($id);
+            $group = Group::bookingwithTrashed()->findOrFail($id);
     
-            $deleted = $appsite->forceDelete();
+            $deleted = $group->forceDelete();
         }catch (Exception $e){
             DB::rollBack();
             Log::critical(label_case($this->module_title.' AT '.Carbon::now().' | Function:'.__FUNCTION__).' | Msg: '.$e->getMessage());
@@ -348,17 +347,17 @@ class AppsiteService{
 
         DB::commit();
 
-        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$appsite->name.', ID:'.$appsite->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
+        Log::info(label_case($this->module_title.' '.__FUNCTION__)." | '".$group->name.', ID:'.$group->id." ' by User:".(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $appsite,
+            'data'=> $group,
         );
     }
 
     public function import(Request $request){
-        $import = Excel::import(new AppsiteImport($request), $request->file('data_file'));
+        $import = Excel::import(new GroupImport($request), $request->file('data_file'));
     
         return (object) array(
             'error'=> false,            
@@ -380,9 +379,9 @@ class AppsiteService{
 
     public static function prepareOptions(){
         
-        $groups = Group::pluck('name','id');
+        $opt = ["1","2","3","4","5","6","7","8","9"];
         $options = array(
-            'groups'         => $groups,
+            'opt'         => $opt,
         );
 
         return $options;

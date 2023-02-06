@@ -4,15 +4,15 @@ namespace Modules\System\DataTables;
 
 use Carbon\Carbon;
 use Illuminate\Support\HtmlString;
-use Modules\System\Services\AppsiteService;
-use Modules\System\Entities\Appsite;
+use Modules\System\Services\GroupService;
+use Modules\System\Entities\Group;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AppsitesDataTable extends DataTable
+class GroupsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,11 +20,11 @@ class AppsitesDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function __construct(AppsiteService $appsiteservice)
+    public function __construct(GroupService $groupservice)
     {
-        $this->module_name = 'appsites';
+        $this->module_name = 'groups';
 
-        $this->appsiteservice = $appsiteservice;
+        $this->groupservice = $groupservice;
     }
 
     public function dataTable($query)
@@ -72,13 +72,13 @@ class AppsitesDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Appsite $model
+     * @param \App\Group $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
         $user = auth()->user();
-        $data = Appsite::query()->with(['group']);
+        $data = Group::query();
 
         return $this->applyScopes($data);
     }
@@ -92,7 +92,7 @@ class AppsitesDataTable extends DataTable
     {
         $created_at = 2;
         return $this->builder()
-                ->setTableId('appsite-table')
+                ->setTableId('group-table')
                 ->columns($this->getColumns())
                 ->minifiedAjax()
                 ->dom(config('mk-datatables.mk-dom'))
@@ -125,11 +125,9 @@ class AppsitesDataTable extends DataTable
                   ->printable(false)
                   ->addClass('text-center'),
             Column::make('id')->hidden(),
-            Column::make('name')->title(__("system::appsites.name")),
-            Column::make('url')->title(__("system::appsites.url")),
-            Column::make('group.name')->data('group.name')->title(__("system::appsites.group_id")),
-            Column::make('priority')->title(__("system::appsites.priority")),
-            Column::make('available')->title(__("system::appsites.available")),
+            Column::make('name')->title(__("system::groups.name")),
+            Column::make('priority')->title(__("system::groups.priority")),
+            Column::make('available')->title(__("system::groups.available")),
             Column::make('created_at'),
             Column::make('updated_at')->hidden(),
         ];
@@ -142,6 +140,6 @@ class AppsitesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Appsite_' . date('YmdHis');
+        return 'Group_' . date('YmdHis');
     }
 }

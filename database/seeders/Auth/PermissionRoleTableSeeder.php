@@ -69,6 +69,15 @@ class PermissionRoleTableSeeder extends Seeder
         ]);
         echo "\n _Mkdums_ Permissions Created.";
 
+        \Artisan::call('auth:permission', [
+            'name' => 'appsites',
+        ]);
+        echo "\n _Appsites_ Permissions Created.";
+
+        \Artisan::call('auth:permission', [
+            'name' => 'groups',
+        ]);
+        echo "\n _Groups_ Permissions Created.";
 
         echo "\n\n";
 

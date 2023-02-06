@@ -34,21 +34,21 @@ class GenerateMenus
             ])
             ->data([
                 'order' => 3,
-                'activematches' => ['admin/appsite*'],
-                'permission' => ['view_appsite'],
+                'activematches' => ['admin/appsites*'],
+                'permission' => ['view_appsites'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
             ]);
 
-            $menu->add('<i class="fas fa-system c-sidebar-nav-icon"></i> '.trans('menu.system.cores'), [
-                'route' => 'backend.cores.index',
+            $menu->add('<i class="fas fa-graduation-cap c-sidebar-nav-icon"></i> '.trans('menu.system.group'), [
+                'route' => 'backend.groups.index',
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order' => 4,
-                'activematches' => ['admin/cores*'],
-                'permission' => ['view_cores'],
+                'order' => 34,
+                'activematches' => ['admin/groups*'],
+                'permission' => ['view_groups'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',

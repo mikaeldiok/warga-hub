@@ -13,16 +13,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
-use Modules\System\Database\factories\AppsiteFactory;
+use Modules\System\Database\factories\GroupFactory;
 
-class Appsite extends BaseModel
+class Group extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = "appsites";
+    protected $table = "groups";
 
-    protected static $logName = 'appsites';
+    protected static $logName = 'groups';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['name', 'id'];
 
@@ -39,8 +39,8 @@ class Appsite extends BaseModel
         return $this->available;
     }
 
-    public function group(){
-        return $this->belongsTo('Modules\System\Entities\Group','group_id');
+    public function appsites(){
+        return $this->hasMany('Modules\System\Entities\Appsite');
     }
 }
 

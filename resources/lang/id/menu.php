@@ -8,6 +8,7 @@ return [
     'system' => [
         'title'             => 'System',
         'appsite'           => 'Website',
+        'group'             => 'Grup',
     ],
 
     'core' => [
