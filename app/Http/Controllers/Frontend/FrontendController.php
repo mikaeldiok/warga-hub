@@ -3,9 +3,17 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Modules\System\Services\GroupService;
 
 class FrontendController extends Controller
 {
+
+    protected $groupService;
+
+    public function __construct(GroupService $groupService)
+    {
+        $this->groupService = $groupService;
+    }
     /**
      * Show the application dashboard.
      *
@@ -15,8 +23,16 @@ class FrontendController extends Controller
     {
         $body_class = '';
 
+        $groupResponse = $this->groupService->getAllGroup();
+
+        if(!$groupResponse->error){
+            $groups = $groupResponse->data;
+        }else{
+            $groups = NULL;
+        }
+
         return view("frontend.index",
-            compact('body_class')
+            compact('body_class','groups')
         );
 
     }

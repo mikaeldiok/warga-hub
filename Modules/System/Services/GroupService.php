@@ -55,7 +55,7 @@ class GroupService{
     
     public function getAllGroup(){
 
-        $group =Group::query()->available()->orderBy('id','desc')->get();
+        $group =Group::query()->available()->orderBy('priority','asc')->get();
         
         return (object) array(
             'error'=> false,            
