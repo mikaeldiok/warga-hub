@@ -14,14 +14,15 @@
         <div class="row">
           @foreach($group->appsites as $appsite)
           <div class="col-md-4">
-            <div class="media block-6">
-              <div class="icon text-warning"><span class="ion-ios-contacts"></span></div>
-              <div class="media-body">
-                <h3 class="heading">{{$appsite->name}}</h3>
+            <div class="card" style="width:400px">
+              <div class="card-body">
+                <a href="{{$appsite->url}}" class="">
+                  <h3 class="heading">{{$appsite->name}}</h3>
+                </a>
                 <p>{{$appsite->url}}</p>
-                <p><a href="#" class="link-underline">Learn More</a></p>
+                <!-- <p><a href="{{$appsite->url}}" class="link-underline">Learn More</a></p> -->
               </div>
-            </div> 
+            </div>
           </div>
           @endforeach
 
