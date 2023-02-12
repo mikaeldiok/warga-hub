@@ -1,5 +1,5 @@
 
-<footer class="footer" style="padding:1em 0">
+<footer class="footer bg-primary" style="padding:1em 0">
     <div class="row pt-5">
       <div class="col-md-12 text-center">
         
