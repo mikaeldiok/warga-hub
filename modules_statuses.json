@@ -4,5 +4,6 @@
     "Comment": false,
     "Core": false,
     "Mkstarter": false,
-    "System": true
+    "System": true,
+    "Data": true
 }

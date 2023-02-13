@@ -1,0 +1,23 @@
+{
+    "name": "mikaeldiok/data",
+    "description": "",
+    "authors": [
+        {
+            "name": "mikaeldiok",
+            "email": "mikaeldiok@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Data\\": ""
+        }
+    }
+}
