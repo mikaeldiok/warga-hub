@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUnitTable extends Migration
+class CreateSubunitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateUnitTable extends Migration
      */
     public function up()
     {
-        Schema::create('units', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
-            $table->string('name')->nullable()->default(NULL);
+        Schema::create('subunits', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('unit_id');
+            $table->integer('sequence')->nullable();
+            $table->string('code');
+            $table->string('name')->nullable();
+            $table->integer('students_count')->nullable();;
             $table->timestamps();
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
@@ -31,6 +35,6 @@ class CreateUnitTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('subunits');
     }
 }

@@ -24,7 +24,7 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-title',
             ])
             ->data([
-                'order'         => 2,
+                'order'         => 5,
                 'permission'    => ['view_units'],
             ]);
 
@@ -33,7 +33,7 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order' => 3,
+                'order' => 6,
                 'activematches' => ['admin/units*'],
                 'permission' => ['view_units'],
             ])
@@ -41,14 +41,14 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-link',
             ]);
 
-            $menu->add('<i class="fas fa-data c-sidebar-nav-icon"></i> '.trans('menu.data.cores'), [
-                'route' => 'backend.cores.index',
+            $menu->add('<i class="fas fa-graduation-cap c-sidebar-nav-icon"></i> '.trans('menu.data.subunits'), [
+                'route' => 'backend.subunits.index',
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order' => 4,
-                'activematches' => ['admin/cores*'],
-                'permission' => ['view_cores'],
+                'order' => 6,
+                'activematches' => ['admin/subunits*'],
+                'permission' => ['view_subunits'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',

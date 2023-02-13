@@ -13,26 +13,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
-use Modules\Data\Database\factories\UnitFactory;
+use Modules\Data\Database\factories\SubunitFactory;
 
-class Unit extends BaseModel
+class Subunit extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = "units";
+    protected $table = "subunits";
 
-    protected static $logName = 'units';
+    protected static $logName = 'subunits';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['name', 'id'];
 
     protected static function newFactory()
     {
-        return \Modules\Core\Database\factories\UnitFactory::new();
+        return \Modules\Core\Database\factories\SubunitFactory::new();
     }
 
-    public function subunits(){
-        return $this->hasMany('Modules\Data\Entities\Subunit');
+    public function unit(){
+        return $this->belongsTo('Modules\Data\Entities\Unit');
     }
 }
 

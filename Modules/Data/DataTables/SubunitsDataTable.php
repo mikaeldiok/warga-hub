@@ -4,15 +4,15 @@ namespace Modules\Data\DataTables;
 
 use Carbon\Carbon;
 use Illuminate\Support\HtmlString;
-use Modules\Data\Services\UnitService;
-use Modules\Data\Entities\Unit;
+use Modules\Data\Services\SubunitService;
+use Modules\Data\Entities\Subunit;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UnitsDataTable extends DataTable
+class SubunitsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,11 +20,11 @@ class UnitsDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function __construct(UnitService $unitService)
+    public function __construct(SubunitService $subunitService)
     {
-        $this->module_name = 'units';
+        $this->module_name = 'subunits';
 
-        $this->unitService = $unitService;
+        $this->subunitService = $subunitService;
     }
 
     public function dataTable($query)
@@ -79,13 +79,13 @@ class UnitsDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Unit $model
+     * @param \App\Subunit $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
         $user = auth()->user();
-        $data = Unit::query();
+        $data = Subunit::query();
 
         return $this->applyScopes($data);
     }
@@ -99,7 +99,7 @@ class UnitsDataTable extends DataTable
     {
         $created_at = 2;
         return $this->builder()
-                ->setTableId('units-table')
+                ->setTableId('subunits-table')
                 ->columns($this->getColumns())
                 ->minifiedAjax()
                 ->dom(config('mk-datatables.mk-dom'))
@@ -132,6 +132,8 @@ class UnitsDataTable extends DataTable
                   ->printable(false)
                   ->addClass('text-center'),
             Column::make('name'),
+            Column::make('code'),
+            Column::make('students_count'),
             Column::make('created_at'),
         ];
     }
@@ -143,6 +145,6 @@ class UnitsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Units_' . date('YmdHis');
+        return 'Subunits_' . date('YmdHis');
     }
 }

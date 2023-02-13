@@ -11,6 +11,12 @@ return [
         'group'             => 'Group',
     ],
 
+    'data' => [
+        'title'             => 'Data',
+        'units'             => 'Unit',
+        'subunits'          => 'Subunits',
+    ],
+
     'core' => [
         'title'             => 'Core Data',
         'paths'             => 'Paths',

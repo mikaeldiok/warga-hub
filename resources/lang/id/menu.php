@@ -11,6 +11,12 @@ return [
         'group'             => 'Grup',
     ],
 
+    'data' => [
+        'title'             => 'Data',
+        'units'             => 'Unit',
+        'subunits'          => 'Rombel',
+    ],
+
     'core' => [
         'title'             => 'Data Inti',
         'paths'             => 'Jalur Pendaftaran',

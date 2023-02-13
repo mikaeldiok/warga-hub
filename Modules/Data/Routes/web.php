@@ -71,6 +71,17 @@ Route::group(['namespace' => '\Modules\Data\Http\Controllers\Backend', 'as' => '
     Route::post("$module_name/import", ['as' => "$module_name.import", 'uses' => "$controller_name@import"]);
     Route::resource("$module_name", "$controller_name");
 
+    $module_name = 'subunits';
+    $controller_name = 'SubunitsController';
+    Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
+    Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
+    Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
+    Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
+    Route::delete("$module_name/purge/{id}", ['as' => "$module_name.purge", 'uses' => "$controller_name@purge"]);
+    Route::post("$module_name/get_unit", ['as' => "$module_name.getunit", 'uses' => "$controller_name@get_unit"]);
+    Route::post("$module_name/import", ['as' => "$module_name.import", 'uses' => "$controller_name@import"]);
+    Route::resource("$module_name", "$controller_name");
+
     $module_name = 'cores';
     $controller_name = 'CoresController';
     Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);

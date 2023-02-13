@@ -46,7 +46,7 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order' => 34,
+                'order' => 4,
                 'activematches' => ['admin/groups*'],
                 'permission' => ['view_groups'],
             ])
