@@ -2,7 +2,7 @@
 
 return [
 
-    'name'                      => 'Nama',
+    'name_or_jurusan'           => 'Nama Or Jurusan',
     'color'                     => 'Color',
     'sequence'                  => 'Sequence',
     'teacher_count'             => 'Jumlah Tendik / Guru',

@@ -60,13 +60,13 @@
                         @foreach($$module_name as $module_name_singular)
                         <tr>
                             <td>
-                                {{ $module_name_singular->id }}
+                                {{ $module_name_singular->name }}
                             </td>
                             <td>
                                 <a href="{{ url("admin/$module_name", $module_name_singular->id) }}">{{ $module_name_singular->name }}</a>
                             </td>
                             <td>
-                                {{ $module_name_singular->unit_code }}
+                                {{ $module_name_singular->unit_id }}
                             </td>
                             <td>
                                 {{ $module_name_singular->updated_at->diffForHumans() }}
@@ -89,12 +89,11 @@
         <div class="row">
             <div class="col-7">
                 <div class="float-left">
-                    Total {{ $$module_name->total() }} {{ ucwords($module_name) }}
+                    Total  {{ ucwords($module_name) }}
                 </div>
             </div>
             <div class="col-5">
                 <div class="float-right">
-                    {!! $$module_name->render() !!}
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@ return [
         'title'             => 'Data',
         'units'             => 'Unit',
         'subunits'          => 'Rombel',
+        'fees'              => 'Biaya',
     ],
 
     'core' => [

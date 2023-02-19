@@ -41,6 +41,19 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-link',
             ]);
 
+            $menu->add('<i class="fas fa-graduation-cap c-sidebar-nav-icon"></i> '.trans('menu.data.fees'), [
+                'route' => 'backend.fees.index',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order' => 6,
+                'activematches' => ['admin/fees*'],
+                'permission' => ['view_fees'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
             $menu->add('<i class="fas fa-graduation-cap c-sidebar-nav-icon"></i> '.trans('menu.data.subunits'), [
                 'route' => 'backend.subunits.index',
                 'class' => 'c-sidebar-nav-item',

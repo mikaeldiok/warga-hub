@@ -17,50 +17,78 @@
 @endphp
 
 @section('content')
-<div class="container">
-  <div class="form-group mb-4 search">
-    <input type="search" placeholder="Search..." aria-describedby="button-addon" class="form-control border-primary" data-search>
+<div class="section">
+  <div class="container">
+    <div class="form-group mb-4 search">
+      <input type="search" placeholder="Search..." aria-describedby="button-addon" class="form-control border-primary" data-search>
+    </div>
   </div>
-</div>
 
-<div class="container">
-  @foreach($groups as $group)
-    <div class="mb-5" data-filter-item-group>
-        <div class="row">
-          <div class="col-md-12">
-            <h2>{{$group->name}}</h2>
-          </div>
+  <div class="container">
+    @php
+      $color_counter = 0
+    @endphp
+    <div class="row">
+      @foreach($groups as $group)
+        <div class="col-md-4 m-2"  data-filter-item data-filter-name="{{$group->name}}">
+          <a href="#{{$group->name}}_modal" data-toggle="modal" data-target="#{{$group->name}}_modal">        
+            <div class="card" style="border-color:{{$colors[$color_counter]}};" >
+              <div class="card-body">
+                  <h5 class="heading">{{$group->name}}</h5>
+                <p></p>
+              </div>
+            </div>
+          </a>
         </div>
-        <div class="row">
-          <!-- <div class="items"> -->
-            @php
-              $color_counter = 0
-            @endphp
-            @foreach($group->appsites as $appsite)
-              <div class="col-md-4 m-2"  data-filter-item data-filter-name="{{$appsite->name}}">
-                <div class="card" style="border-color:{{$colors[$color_counter]}};" >
-                  <div class="card-body">
-                    <a href="{{$appsite->url}}" class="">
-                      <h5 class="heading">{{$appsite->name}}</h5>
-                    </a>
-                    <p>{{$appsite->url}}</p>
-                    <!-- <p><a href="{{$appsite->url}}" class="link-underline">Learn More</a></p> -->
-                  </div>
-                </div>
+
+        <div id="{{$group->name}}_modal" class="modal fade">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <!-- Header -->
+              <div class="modal-header">
+                <h1>{{$group->name}}</h1>
               </div>
 
-              @php
-                if($color_counter >= count($colors))
-                  $color_counter = 0;
-                else
-                  $color_counter++;
-              @endphp
-            @endforeach
-          <!-- </div> -->
+              <!-- Body -->
+              <div class="modal-body">
+                @php
+                  $color_counter_appsite = 0
+                @endphp
+                @foreach($group->appsites as $appsite)
+                  <a href="{{$appsite->url}}">        
+                    <div class="card my-3" style="border-color:{{$colors[$color_counter_appsite]}};" >
+                      <div class="card-body">
+                          <h5 class="heading">{{$appsite->name}}</h5>
+                      </div>
+                    </div>
+                  </a>
+                  @php
+                    if($color_counter_appsite >= count($colors))
+                      $color_counter_appsite = 0;
+                    else
+                      $color_counter_appsite++;
+                  @endphp
+                @endforeach
+              </div>
+
+              <!-- Footer -->
+              <div class="modal-footer modal-footer--mine">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
-    </div> <!-- .site-section -->
-  @endforeach
+
+        @php
+          if($color_counter >= count($colors))
+            $color_counter = 0;
+          else
+            $color_counter++;
+        @endphp
+      @endforeach
+    </div>
   </div>
+</div>
 @endsection
 
 @push ('after-styles')

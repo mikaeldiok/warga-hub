@@ -15,10 +15,24 @@ class AddTeacherToUnitsTable extends Migration
     {
         Schema::table('units', function (Blueprint $table) {
             $table->integer('teacher_count')->nullable();
+            $table->integer('staff_count')->nullable();
+            $table->boolean('use_generation')->nullable();
+            $table->boolean('use_jurusan')->nullable();
+        });
+
+        Schema::create('fees', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('unit_id');
+            $table->string('name_or_jurusan');
             $table->double('SPP')->nullable();
             $table->double('DP')->nullable();
             $table->double('DPP')->nullable();
             $table->double('UP')->nullable();
+            $table->timestamps();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
+            $table->softDeletes();
         });
     }
 
@@ -31,10 +45,10 @@ class AddTeacherToUnitsTable extends Migration
     {
         Schema::table('units', function (Blueprint $table) {
             $table->dropColumn('teacher_count');
-            $table->dropColumn('SPP');
-            $table->dropColumn('DP');
-            $table->dropColumn('DPP');
-            $table->dropColumn('UP');
+            $table->dropColumn('staff_count');
+            $table->dropColumn('use_generation');
         });
+
+        Schema::dropIfExists('fees');
     }
 }

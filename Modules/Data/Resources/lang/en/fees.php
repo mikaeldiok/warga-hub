@@ -2,13 +2,13 @@
 
 return [
 
-    'name'                      => 'Nama',
+    'name_or_jurusan'           => 'Nama Or Jurusan',
     'color'                     => 'Color',
     'sequence'                  => 'Sequence',
-    'teacher_count'             => 'Jumlah Tendik / Guru',
-    'staff_count'               => 'Jumlah Staff',
+    'teacher_count'             => 'Teacher Count',
+    'staff_count'               => 'Staff Count',
     'DPP'                       => 'DPP',
     'DP'                        => 'DP',
     'SPP'                       => 'SPP',
-    'UP'                        => 'UP', 
+    'UP'                        => 'UP',
 ];
