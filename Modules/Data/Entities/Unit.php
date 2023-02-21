@@ -25,8 +25,6 @@ class Unit extends BaseModel
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['name', 'id'];
 
-    
-
     protected static function newFactory()
     {
         return \Modules\Core\Database\factories\UnitFactory::new();
@@ -42,6 +40,10 @@ class Unit extends BaseModel
 
     public function getTotalStudentAttribute(){
         return $this->subunits->sum('students_count');
+    }
+
+    public function getTotalStaffAttribute(){
+        return $this->teacher_count + $this->staff_count;
     }
 }
 

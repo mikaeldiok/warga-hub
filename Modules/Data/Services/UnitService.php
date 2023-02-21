@@ -447,7 +447,7 @@ class UnitService{
 
         $unitsCollection = Unit::orderby('sequence','asc')->get();
 
-        $units = $unitsCollection->pluck('teacher_count','name');
+        $units = $unitsCollection->pluck('total_staff','name');
 
         [$keys, $values] = Arr::divide($units->toArray());
 
@@ -466,7 +466,7 @@ class UnitService{
                             'data' => $unitsCollection->map(function ($unit) {
                                 return [
                                     'name' => $unit->name,
-                                    'value' => $unit->teacher_count,
+                                    'value' => $unit->total_staff,
                                     'itemStyle' => [
                                         'color' => $unit->color,
                                     ],
