@@ -36,7 +36,7 @@
       <table class="table table-fixed">
         <thead>
           <tr>
-            <th scope="col" class="fixed-column">BIAYA</th>
+            <th scope="col" class="fixed-column bg-white">BIAYA</th>
             @foreach($fees as $fee)
               <th scope="col">{{ $fee->name_or_jurusan}}</th>
             @endforeach
@@ -44,25 +44,25 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row" class="fixed-column">DP</th>
+            <th scope="row" class="fixed-column bg-white">DP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->DP ? "Rp.".number_format($fee->DP,0,"",".") : ""}}</td>
             @endforeach
           </tr>
           <tr>
-            <th scope="row" class="fixed-column">DPP</th>
+            <th scope="row" class="fixed-column bg-white">DPP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->DPP ? "Rp.".number_format($fee->DPP ,0,"",".") : ""}}</td>
             @endforeach
           </tr>
           <tr>
-            <th scope="row" class="fixed-column">SPP</th>
+            <th scope="row" class="fixed-column bg-white">SPP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->SPP ? "Rp.".number_format($fee->SPP,0,"",".") : ""}}</td>
             @endforeach
           </tr>
           <tr>
-            <th scope="row" class="fixed-column">UP</th>
+            <th scope="row" class="fixed-column bg-white">UP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->UP ? "Rp.".number_format($fee->UP,0,"",".") : ""}}</td>
             @endforeach
