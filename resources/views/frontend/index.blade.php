@@ -21,10 +21,10 @@
 
   <div class="container my-4">
     <div class="row">
-      <div class="col mx-3 border rounded">
+      <div class="col col-sm-6 mx-3 border rounded">
         {!! $totalStudentChart->container() !!}
       </div>
-      <div class="col mx-3 border rounded">
+      <div class="col col-sm-12 mx-3 border rounded">
         {!! $teacherPerUnitChart->container() !!}
       </div>
     </div>
@@ -62,7 +62,7 @@
             @endforeach
           </tr>
           <tr>
-            <th scope="row" class="fixed-column bg-white-gray">UP</th>
+            <th scope="row" class="fixed-column bg-light-gray">UP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->UP ? "Rp.".number_format($fee->UP,0,"",".") : ""}}</td>
             @endforeach
@@ -103,7 +103,12 @@
                   $color_counter_appsite = 0
                 @endphp
                 @foreach($group->appsites as $appsite)
-                  <a href="{{$appsite->url}}">        
+                  <a href="{{$appsite->url}}">    
+                    
+                    @php
+                      if(!array_key_exists($colors[$color_counter_appsite]))
+                        $color_counter_appsite = 0;
+                    @endphp    
                     <div class="card my-3" style="border-color:{{$colors[$color_counter_appsite]}};" >
                       <div class="card-body">
                           <h5 class="heading">{{$appsite->name}}</h5>
