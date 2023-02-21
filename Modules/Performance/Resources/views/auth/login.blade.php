@@ -50,7 +50,7 @@
                         </div>
                         @endif
 
-                        <form role="form" method="POST" action="{{ route('auth.mkdums.login') }}">
+                        <form role="form" method="POST" action="{{ route('auth.parameters.login') }}">
                             @csrf
 
                             <!-- redirectTo URL -->
@@ -61,7 +61,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" id="mkdum_email" name="mkdum_email" value="{{ old('mkdum_email') }}" placeholder="{{ __('E-Mail Address') }}" aria-label="email" aria-describedby="input-email" required>
+                                    <input type="email" class="form-control" id="parameter_email" name="parameter_email" value="{{ old('parameter_email') }}" placeholder="{{ __('E-Mail Address') }}" aria-label="email" aria-describedby="input-email" required>
                                 </div>
                             </div>
                             <div class="form-group">

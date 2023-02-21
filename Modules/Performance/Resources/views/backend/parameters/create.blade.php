@@ -26,6 +26,12 @@
             <!--/.col-->
             <div class="col-4">
                 <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+                    <button type="button" class="btn btn-secondary btn-sm ml-1" data-toggle="modal" data-target="#importModal">
+                        Import
+                    </button>
+                    @include ("performance::backend.$module_name.import")
+                </div>
+                <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
                     <a href="{{ route("backend.$module_name.index") }}" class="btn btn-secondary btn-sm ml-1" data-toggle="tooltip" title="{{ $module_title }} List"><i class="fas fa-list-ul"></i> List</a>
                 </div>
             </div>

@@ -1,20 +1,20 @@
 <?php
 
-namespace Modules\Mkstarter\Providers;
+namespace Modules\Performance\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 //Events
-Use Modules\Mkstarter\Events\MkdumRegistered;
+Use Modules\Performance\Events\ParameterRegistered;
 
 //Listeners
-Use Modules\Mkstarter\Listeners\NotifyMkdum;
+Use Modules\Performance\Listeners\NotifyParameter;
 
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        MkdumRegistered::class => [
-            NotifyMkdum::class,
+        ParameterRegistered::class => [
+            NotifyParameter::class,
         ],
     ];
 }

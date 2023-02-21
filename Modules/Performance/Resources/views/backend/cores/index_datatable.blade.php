@@ -92,13 +92,13 @@
 @stop
 
 @push ('after-styles')
-<!-- DataTables Mkstarter and Extensions -->
+<!-- DataTables Performance and Extensions -->
 <link rel="stylesheet" href="{{ asset('vendor/datatable/datatables.min.css') }}">
 
 @endpush
 
 @push ('after-scripts')
-<!-- DataTables Mkstarter and Extensions -->
+<!-- DataTables Performance and Extensions -->
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
 
 <script type="text/javascript">

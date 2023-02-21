@@ -43,6 +43,9 @@
 
                     <div class="col-8">
                         <div class="float-right">
+                            @can('delete_'.$module_name)
+                            <button type="button" class="btn btn-danger delete-confirm"><i class="fas fa-trash-alt"></i></button>
+                            @endcan
                             <a href="{{ route("backend.$module_name.index") }}" class="btn btn-warning" data-toggle="tooltip" title="{{__('labels.backend.cancel')}}"><i class="fas fa-reply"></i> Cancel</a>
                         </div>
                     </div>

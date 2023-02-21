@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mkstarter\Http\Middleware;
+namespace Modules\Performance\Http\Middleware;
 
 use Closure;
 
@@ -17,31 +17,31 @@ class GenerateMenus
     public function handle($request, Closure $next)
     {
         \Menu::make('admin_sidebar', function ($menu) {
-            //mkstarter menu
+            //performance menu
 
             // Separator: Mkstarer
-            $menu->add('Mkstarter', [
+            $menu->add('Performance', [
                 'class' => 'c-sidebar-nav-title',
             ])
             ->data([
                 'order'         => 2,
-                'permission'    => ['view_mkdums'],
+                'permission'    => ['view_parameters'],
             ]);
 
-            $menu->add('<i class="fas fa-graduation-cap c-sidebar-nav-icon"></i> '.trans('menu.mkstarter.mkdums'), [
-                'route' => 'backend.mkdums.index',
+            $menu->add('<i class="fas fa-graduation-cap c-sidebar-nav-icon"></i> '.trans('menu.performance.parameters'), [
+                'route' => 'backend.parameters.index',
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
                 'order' => 3,
-                'activematches' => ['admin/mkdums*'],
-                'permission' => ['view_mkdums'],
+                'activematches' => ['admin/parameters*'],
+                'permission' => ['view_parameters'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
             ]);
 
-            $menu->add('<i class="fas fa-mkstarter c-sidebar-nav-icon"></i> '.trans('menu.mkstarter.cores'), [
+            $menu->add('<i class="fas fa-performance c-sidebar-nav-icon"></i> '.trans('menu.performance.cores'), [
                 'route' => 'backend.cores.index',
                 'class' => 'c-sidebar-nav-item',
             ])

@@ -17,10 +17,22 @@
         <div class="row">
             <div class="col-8">
                 <h4 class="card-title mb-0">
-                    <i class="{{ $module_icon }}"></i>  {{ $module_title }} <small class="text-muted">{{ __($module_action) }}</small>
+                    <i class="{{ $module_icon }}"></i> {{ $module_title }} <small class="text-muted">{{ __($module_action) }}</small>
                 </h4>
                 <div class="small text-muted">
                     @lang(":module_name Management Dashboard", ['module_name'=>Str::title($module_name)])
+                </div>
+            </div>
+            <!--/.col-->
+            <div class="col-4">
+                <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+                    <button type="button" class="btn btn-secondary btn-sm ml-1" data-toggle="modal" data-target="#importModal">
+                        Import
+                    </button>
+                    @include ("performance::backend.$module_name.import")
+                </div>
+                <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+                    <a href="{{ route("backend.$module_name.index") }}" class="btn btn-secondary btn-sm ml-1" data-toggle="tooltip" title="{{ $module_title }} List"><i class="fas fa-list-ul"></i> List</a>
                 </div>
             </div>
             <!--/.col-->
@@ -31,19 +43,21 @@
 
         <div class="row mt-4">
             <div class="col">
-                {{ html()->modelForm($$module_name_singular, 'PATCH', route("backend.$module_name.update", $$module_name_singular))->class('form')->attributes(['enctype'=>"multipart/form-data"])->open() }}
+                {{ html()->form('POST', route("backend.$module_name.store"))->class('form')->open() }}
 
                 @include ("performance::backend.$module_name.form")
+
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="form-group">
-                            {{ html()->submit($text = icon('fas fa-save')." Save")->class('btn btn-success') }}
+                            {{ html()->button($text = "<i class='fas fa-plus-circle'></i> " . ucfirst($module_action) . "", $type = 'submit')->class('btn btn-success') }}
                         </div>
                     </div>
-
-                    <div class="col-8">
+                    <div class="col-6">
                         <div class="float-right">
-                            <a href="{{ route("backend.$module_name.index") }}" class="btn btn-warning" data-toggle="tooltip" title="{{__('labels.backend.cancel')}}"><i class="fas fa-reply"></i> Cancel</a>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-warning" onclick="history.back(-1)"><i class="fas fa-reply"></i> Cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -57,19 +71,10 @@
     <div class="card-footer">
         <div class="row">
             <div class="col">
-                <small class="float-right text-muted">
-                    Updated: {{$$module_name_singular->updated_at->diffForHumans()}},
-                    Created at: {{$$module_name_singular->created_at->isoFormat('LLLL')}}
-                </small>
+
             </div>
         </div>
     </div>
 </div>
 
 @stop
-
-@push ('after-scripts')
-
-@include('backend.includes.ajax-delete-swal')
-
-@endpush

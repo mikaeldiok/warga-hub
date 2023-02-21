@@ -33,7 +33,7 @@
 
 <body>
 
-    @include('mkstarter::frontend.includes.header')
+    @include('performance::frontend.includes.header')
 
     <!-- <x-preloader /> -->
 

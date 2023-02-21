@@ -59,10 +59,10 @@
                         </div>
                         @endif
 
-                        <form role="form" method="POST" action="{{ route('auth.mkdums.register') }}">
+                        <form role="form" method="POST" action="{{ route('auth.parameters.register') }}">
                             @csrf
                             
-                            @include('mkstarter::auth.register-form')
+                            @include('performance::auth.register-form')
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="col-6 text-right">
-                        <a href="{{ route('auth.mkdums.login') }}" class="text-primary">
+                        <a href="{{ route('auth.parameters.login') }}" class="text-primary">
                             <small>{{ __('Login to account') }}</small>
                         </a>
                     </div>

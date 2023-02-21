@@ -24,10 +24,10 @@
             <div class="col-4">
                 <div class="float-right">
                     @can('add_'.$module_name)
-                        <!-- <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}"/> -->
+                        <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}"/>
                     @endcan
 
-                    <!-- <div class="btn-group" role="group" aria-label="Toolbar button groups">
+                    <div class="btn-group" role="group" aria-label="Toolbar button groups">
                         <div class="btn-group" role="group">
                             <button id="btnGroupToolbar" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-cog"></i>
@@ -40,7 +40,7 @@
                                 @endcan
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <!--/.col-->

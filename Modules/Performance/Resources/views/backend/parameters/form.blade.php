@@ -1,8 +1,27 @@
+
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <?php
+            $field_name = 'available';
+            $field_lable = label_case("Available?");
+            $field_placeholder = "-- Pilih --";
+            $required = "required";
+            $select_options = [
+                '1' => 'Ya',
+                '0' => 'Tidak',
+            ];
+            ?>
+            {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-6">
         <div class="form-group">
             <?php
-            $field_name = 'performance_core_code';
+            $field_name = 'name';
             $field_lable = __("performance::$module_name.$field_name");
             $field_placeholder = $field_lable;
             $required = "required";
@@ -13,33 +32,17 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-6">
+    <div class="col-12 col-sm-6">
         <div class="form-group">
             <?php
-            $field_name = 'performance_core_name';
-            $field_lable = __("performance::$module_name.$field_name");
-            $field_placeholder = $field_lable;
+            $field_name = 'religion';
+            $field_lable = label_case($field_name);
+            $field_placeholder = "-- Pilih --";
             $required = "required";
+            $select_options = $options['opt'];
             ?>
             {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", 'aria-label'=>'Image']) }}
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div class="form-group">
-            <?php
-            $field_name = 'performance_core_value';
-            $field_lable = __("performance::$module_name.$field_name")." (Pisahkan dengan ' , ')";
-            $field_placeholder = $field_lable;
-            $required = "";
-            ?>
-            {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
-            {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-            @if($core->performance_core_code == "recruitment_status")
-            <small class="text-danger">Status yang paling akhir haruslah status yang menujukkan bahwa siswa diterima</small>
-            @endif
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
 </div>
@@ -75,6 +78,5 @@ $(function() {
         }
     });
 });
-</script>
 
 @endpush
