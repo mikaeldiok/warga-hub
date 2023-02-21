@@ -436,6 +436,18 @@ class UnitService{
                     'yAxis' => [
                         'show' => false,
                     ],
+                    'graphic' => [
+                        'type' => 'text',
+                        'left' => 'right',
+                        'bottom' => 'bottom',
+                        'z' => 100,
+                        'style' => [
+                            'fill' => '#999',
+                            'text' => 'Total: ' . array_sum($values),
+                            'fontSize' => 20,
+                            'fontWeight' => 'bold',
+                        ],
+                    ],
                 ]);
 
         return $chart;
@@ -456,40 +468,52 @@ class UnitService{
         $chart->dataset("unit", 'pie', $values);
 
         $chart->options([
-                    'title' => [
-                        'text' => 'Guru, Dosen, Tendik',
-                        'left' => 'center',
-                    ],
-                    'series' => [
-                        [
-                            'type' => 'pie',
-                            'data' => $unitsCollection->map(function ($unit) {
-                                return [
-                                    'name' => $unit->name,
-                                    'value' => $unit->total_staff,
-                                    'itemStyle' => [
-                                        'color' => $unit->color,
-                                    ],
-                                ];
-                            })->toArray(),
-                        ],
-                    ],
-                    'tooltip' => [
-                        'trigger' => 'item',
-                        'formatter' => '{a} <br/>{b} : {c} ({d}%)',
-                    ],
-                    'legend' => [
-                        'orient' => 'vertical',
-                        'left' => 'left',
-                        'data' => $keys,
-                    ],
-                    'xAxis' => [
-                        'show' => false,
-                    ],
-                    'yAxis' => [
-                        'show' => false,
-                    ],
-                ]);
+            'title' => [
+                'text' => 'Guru, Dosen, Tendik',
+                'left' => 'center',
+            ],
+            'series' => [
+                [
+                    'type' => 'pie',
+                    'data' => $unitsCollection->map(function ($unit) {
+                        return [
+                            'name' => $unit->name,
+                            'value' => $unit->total_staff,
+                            'itemStyle' => [
+                                'color' => $unit->color,
+                            ],
+                        ];
+                    })->toArray(),
+                ],
+            ],
+            'tooltip' => [
+                'trigger' => 'item',
+                'formatter' => '{a} <br/>{b} : {c} ({d}%)',
+            ],
+            'legend' => [
+                'orient' => 'vertical',
+                'left' => 'left',
+                'data' => $keys,
+            ],
+            'xAxis' => [
+                'show' => false,
+            ],
+            'yAxis' => [
+                'show' => false,
+            ],
+            'graphic' => [
+                'type' => 'text',
+                'left' => 'right',
+                'bottom' => 'bottom',
+                'z' => 100,
+                'style' => [
+                    'fill' => '#999',
+                    'text' => 'Total: ' . array_sum($values),
+                    'fontSize' => 20,
+                    'fontWeight' => 'bold',
+                ],
+            ],
+        ]);
 
         return $chart;
     }
