@@ -106,7 +106,7 @@
                   <a href="{{$appsite->url}}">    
                     
                     @php
-                      if(!array_key_exists($colors[$color_counter_appsite]))
+                      if(!array_key_exists($color_counter_appsite,$colors))
                         $color_counter_appsite = 0;
                     @endphp    
                     <div class="card my-3" style="border-color:{{$colors[$color_counter_appsite]}};" >
