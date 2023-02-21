@@ -21,10 +21,11 @@ class Unit extends BaseModel
     use SoftDeletes;
 
     protected $table = "units";
-
     protected static $logName = 'units';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['name', 'id'];
+
+    
 
     protected static function newFactory()
     {
@@ -33,6 +34,14 @@ class Unit extends BaseModel
 
     public function subunits(){
         return $this->hasMany('Modules\Data\Entities\Subunit');
+    }
+
+    public function fees(){
+        return $this->hasMany('Modules\Data\Entities\Fee');
+    }
+
+    public function getTotalStudentAttribute(){
+        return $this->subunits->sum('students_count');
     }
 }
 

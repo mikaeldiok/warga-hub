@@ -185,7 +185,7 @@ class FeesController extends Controller
         
         return view(
             "data::backend.$module_name.edit",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'fee','options')
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular", 'fee','options')
         );
     }
 

@@ -85,7 +85,7 @@ class SubunitsDataTable extends DataTable
     public function query()
     {
         $user = auth()->user();
-        $data = Subunit::query();
+        $data = Subunit::query()->with('unit');
 
         return $this->applyScopes($data);
     }
@@ -131,6 +131,7 @@ class SubunitsDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->addClass('text-center'),
+            Column::make('unit.name')->data('unit.name'),
             Column::make('name'),
             Column::make('code'),
             Column::make('students_count'),

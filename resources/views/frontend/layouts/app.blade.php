@@ -55,7 +55,8 @@
 
     <script type="text/javascript" src="/js/bootstrap-multiselect.js"></script>
     <script type="text/javascript" src="/js/jquery.validate.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
+
     <link rel="stylesheet" href="/css/bootstrap-multiselect.css" type="text/css"/>
 
 @stack('after-scripts')

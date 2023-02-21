@@ -131,6 +131,7 @@ class UnitsDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->addClass('text-center'),
+            Column::make('id')->hidden(),
             Column::make('name'),
             Column::make('created_at'),
         ];

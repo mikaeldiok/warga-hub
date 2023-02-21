@@ -388,4 +388,110 @@ class UnitService{
         return $options;
     }
 
+    public function getStudentPerUnitChart(){
+
+        $chart = new Chart;
+
+        $unitsCollection = Unit::orderby('sequence','asc')->get();
+
+        $units = $unitsCollection->pluck('total_student','name');
+
+        [$keys, $values] = Arr::divide($units->toArray());
+
+        $chart->labels($keys);
+
+        $chart->dataset("unit", 'pie', $values);
+
+        $chart->options([
+                    'title' => [
+                        'text' => 'Murid Tiap Unit',
+                        'left' => 'center',
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'pie',
+                            'data' => $unitsCollection->map(function ($unit) {
+                                return [
+                                    'name' => $unit->name,
+                                    'value' => $unit->total_student,
+                                    'itemStyle' => [
+                                        'color' => $unit->color,
+                                    ],
+                                ];
+                            })->toArray(),
+                        ],
+                    ],
+                    'tooltip' => [
+                        'trigger' => 'item',
+                        'formatter' => '{a} <br/>{b} : {c} ({d}%)',
+                    ],
+                    'legend' => [
+                        'orient' => 'vertical',
+                        'left' => 'left',
+                        'data' => $keys,
+                    ],
+                    'xAxis' => [
+                        'show' => false,
+                    ],
+                    'yAxis' => [
+                        'show' => false,
+                    ],
+                ]);
+
+        return $chart;
+    }
+
+    public function getTeacherPerUnitChart(){
+
+        $chart = new Chart;
+
+        $unitsCollection = Unit::orderby('sequence','asc')->get();
+
+        $units = $unitsCollection->pluck('teacher_count','name');
+
+        [$keys, $values] = Arr::divide($units->toArray());
+
+        $chart->labels($keys);
+
+        $chart->dataset("unit", 'pie', $values);
+
+        $chart->options([
+                    'title' => [
+                        'text' => 'Guru, Dosen, Tendik',
+                        'left' => 'center',
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'pie',
+                            'data' => $unitsCollection->map(function ($unit) {
+                                return [
+                                    'name' => $unit->name,
+                                    'value' => $unit->teacher_count,
+                                    'itemStyle' => [
+                                        'color' => $unit->color,
+                                    ],
+                                ];
+                            })->toArray(),
+                        ],
+                    ],
+                    'tooltip' => [
+                        'trigger' => 'item',
+                        'formatter' => '{a} <br/>{b} : {c} ({d}%)',
+                    ],
+                    'legend' => [
+                        'orient' => 'vertical',
+                        'left' => 'left',
+                        'data' => $keys,
+                    ],
+                    'xAxis' => [
+                        'show' => false,
+                    ],
+                    'yAxis' => [
+                        'show' => false,
+                    ],
+                ]);
+
+        return $chart;
+    }
+
 }

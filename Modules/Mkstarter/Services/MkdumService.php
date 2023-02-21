@@ -11,7 +11,6 @@ use Carbon\Carbon;
 use Auth;
 
 use ConsoleTVs\Charts\Classes\Echarts\Chart;
-use App\Charts\MkdumPerStatus;
 use App\Exceptions\GeneralException;
 
 use Illuminate\Support\Facades\DB;

@@ -4,15 +4,23 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Modules\System\Services\GroupService;
+use Modules\Data\Services\UnitService;
+use Modules\Data\Services\FeeService;
 
 class FrontendController extends Controller
 {
 
     protected $groupService;
+    protected $unitService;
 
-    public function __construct(GroupService $groupService)
+    public function __construct(
+        GroupService $groupService,
+        UnitService $unitService,
+        FeeService $feeService)
     {
         $this->groupService = $groupService;
+        $this->unitService = $unitService;
+        $this->feeService = $feeService;
     }
     /**
      * Show the application dashboard.
@@ -24,7 +32,12 @@ class FrontendController extends Controller
         $body_class = '';
 
         $groupResponse = $this->groupService->getAllGroup();
+        $totalStudentChart = $this->unitService->getStudentPerUnitChart();
+        $teacherPerUnitChart = $this->unitService->getTeacherPerUnitChart();
 
+        $feesResponse = $this->feeService->list();
+        $fees = $feesResponse->data;
+        
         if(!$groupResponse->error){
             $groups = $groupResponse->data;
         }else{
@@ -32,7 +45,7 @@ class FrontendController extends Controller
         }
 
         return view("frontend.index",
-            compact('body_class','groups')
+            compact('body_class','groups','totalStudentChart','teacherPerUnitChart', 'fees')
         );
 
     }

@@ -31,8 +31,8 @@ class Fee extends BaseModel
         return \Modules\Core\Database\factories\FeeFactory::new();
     }
 
-    public function subfees(){
-        return $this->hasMany('Modules\Data\Entities\Subfee');
+    public function unit(){
+        return $this->belongsTo('Modules\Data\Entities\Unit');
     }
 }
 

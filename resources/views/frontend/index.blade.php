@@ -18,19 +18,65 @@
 
 @section('content')
 <div class="section">
-  <div class="container">
-    <div class="form-group mb-4 search">
-      <input type="search" placeholder="Search..." aria-describedby="button-addon" class="form-control border-primary" data-search>
+
+  <div class="container my-4">
+    <div class="row">
+      <div class="col mx-3 border rounded">
+        {!! $totalStudentChart->container() !!}
+      </div>
+      <div class="col mx-3 border rounded">
+        {!! $teacherPerUnitChart->container() !!}
+      </div>
     </div>
+  </div>
+
+  <!-- BIAYA -->
+  <div class="container my-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">-BIAYA-</th>
+          @foreach($fees as $fee)
+            <th scope="col">{{ $fee->name_or_jurusan}}</th>
+          @endforeach
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">DP</th>
+          @foreach($fees as $fee)
+            <td scope="col">Rp. {{$fee->DP ? number_format($fee->DP,0,"",".") : ""}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <th scope="row">DPP</th>
+          @foreach($fees as $fee)
+            <td scope="col">Rp. {{$fee->DPP ? number_format($fee->DPP ,0,"",".") : ""}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <th scope="row">SPP</th>
+          @foreach($fees as $fee)
+            <td scope="col">Rp. {{$fee->SPP ? number_format($fee->SPP,0,"",".") : ""}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <th scope="row">UP</th>
+          @foreach($fees as $fee)
+            <td scope="col">Rp. {{$fee->UP ? number_format($fee->UP,0,"",".") : ""}}</td>
+          @endforeach
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="container">
     @php
       $color_counter = 0
     @endphp
-    <div class="row">
+    <div class="row dflex justify-content-center">
       @foreach($groups as $group)
-        <div class="col-md-4 m-2"  data-filter-item data-filter-name="{{$group->name}}">
+        <div class="col col-lg-5 my-2"  data-filter-item data-filter-name="{{$group->name}}">
           <a href="#{{$group->name}}_modal" data-toggle="modal" data-target="#{{$group->name}}_modal">        
             <div class="card" style="border-color:{{$colors[$color_counter]}};" >
               <div class="card-body">
@@ -105,6 +151,9 @@
 @endpush
 
 @push ('after-scripts')
+
+{!! $totalStudentChart->script() !!}
+{!! $teacherPerUnitChart->script() !!}
 
 <script>
   $(document).ready(function(){

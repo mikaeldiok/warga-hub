@@ -44,8 +44,10 @@ class FeeService{
 
         Log::info(label_case($this->module_title.' '.__FUNCTION__).' | User:'.(Auth::user()->name ?? 'unknown').'(ID:'.(Auth::user()->id ?? "0").')');
 
-        $fee =Fee::query()->orderBy('id','desc')->get();
-        
+        $fee =Fee::join('units', 'units.id', '=', 'fees.unit_id')
+                    ->orderBy('units.sequence','asc')
+                    ->get(['fees.*']);
+
         return (object) array(
             'error'=> false,            
             'message'=> '',
