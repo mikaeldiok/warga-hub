@@ -21,10 +21,10 @@
 
   <div class="container my-4">
     <div class="row">
-      <div class="col col-sm-6 mx-3 border rounded">
+      <div class="col col-12 col-md-6 mx-3 border rounded">
         {!! $totalStudentChart->container() !!}
       </div>
-      <div class="col col-sm-12 mx-3 border rounded">
+      <div class="col col-12 col-md-6 mx-3 border rounded">
         {!! $teacherPerUnitChart->container() !!}
       </div>
     </div>
