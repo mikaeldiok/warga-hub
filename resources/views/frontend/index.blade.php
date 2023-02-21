@@ -33,10 +33,10 @@
   <!-- BIAYA -->
   <div class="container my-4">
     <div class="table-responsive">
-      <table class="table">
+      <table class="table table-fixed">
         <thead>
           <tr>
-            <th scope="col">-BIAYA-</th>
+            <th scope="col" class="fixed-column">BIAYA</th>
             @foreach($fees as $fee)
               <th scope="col">{{ $fee->name_or_jurusan}}</th>
             @endforeach
@@ -44,25 +44,25 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">DP</th>
+            <th scope="row" class="fixed-column">DP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->DP ? "Rp.".number_format($fee->DP,0,"",".") : ""}}</td>
             @endforeach
           </tr>
           <tr>
-            <th scope="row">DPP</th>
+            <th scope="row" class="fixed-column">DPP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->DPP ? "Rp.".number_format($fee->DPP ,0,"",".") : ""}}</td>
             @endforeach
           </tr>
           <tr>
-            <th scope="row">SPP</th>
+            <th scope="row" class="fixed-column">SPP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->SPP ? "Rp.".number_format($fee->SPP,0,"",".") : ""}}</td>
             @endforeach
           </tr>
           <tr>
-            <th scope="row">UP</th>
+            <th scope="row" class="fixed-column">UP</th>
             @foreach($fees as $fee)
               <td scope="col">{{$fee->UP ? "Rp.".number_format($fee->UP,0,"",".") : ""}}</td>
             @endforeach
@@ -149,6 +149,13 @@
   .hidden {
     display: none;
   }
+ 
+  .table-fixed th.fixed-column,
+  .table-fixed td.fixed-column {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
 </style>
 @endpush
 
@@ -170,6 +177,12 @@
           filterItems.removeClass('hidden');
         }
       });
+  });
+
+  $(function(){
+    $('.table-fixed').on('scroll', function(){
+      $('.fixed-column').css('left', $(this).scrollLeft());
+    });
   });
 </script>
 
