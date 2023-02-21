@@ -45,25 +45,25 @@
         <tr>
           <th scope="row">DP</th>
           @foreach($fees as $fee)
-            <td scope="col">Rp. {{$fee->DP ? number_format($fee->DP,0,"",".") : ""}}</td>
+            <td scope="col">{{$fee->DP ? "Rp.".number_format($fee->DP,0,"",".") : ""}}</td>
           @endforeach
         </tr>
         <tr>
           <th scope="row">DPP</th>
           @foreach($fees as $fee)
-            <td scope="col">Rp. {{$fee->DPP ? number_format($fee->DPP ,0,"",".") : ""}}</td>
+            <td scope="col">{{$fee->DPP ? "Rp.".number_format($fee->DPP ,0,"",".") : ""}}</td>
           @endforeach
         </tr>
         <tr>
           <th scope="row">SPP</th>
           @foreach($fees as $fee)
-            <td scope="col">Rp. {{$fee->SPP ? number_format($fee->SPP,0,"",".") : ""}}</td>
+            <td scope="col">{{$fee->SPP ? "Rp.".number_format($fee->SPP,0,"",".") : ""}}</td>
           @endforeach
         </tr>
         <tr>
           <th scope="row">UP</th>
           @foreach($fees as $fee)
-            <td scope="col">Rp. {{$fee->UP ? number_format($fee->UP,0,"",".") : ""}}</td>
+            <td scope="col">{{$fee->UP ? "Rp.".number_format($fee->UP,0,"",".") : ""}}</td>
           @endforeach
         </tr>
       </tbody>
