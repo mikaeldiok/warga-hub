@@ -18,6 +18,12 @@ return [
         'fees'              => 'Biaya',
     ],
 
+    'performance' => [
+        'title'             => 'Performance',
+        'parameters'        => 'Parameters',
+        'values'            => 'Values',   
+    ],
+
     'core' => [
         'title'             => 'Data Inti',
         'paths'             => 'Jalur Pendaftaran',

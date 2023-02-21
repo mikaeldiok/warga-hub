@@ -18,6 +18,12 @@ return [
         'fees'              => 'Fees',
     ],
 
+    'performance' => [
+        'title'             => 'Performance',
+        'parameters'        => 'Parameters',
+        'values'            => 'Values',   
+    ],
+
     'core' => [
         'title'             => 'Core Data',
         'paths'             => 'Paths',

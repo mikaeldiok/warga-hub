@@ -82,7 +82,7 @@
           <a href="#{{$group->name}}_modal" data-toggle="modal" data-target="#{{$group->name}}_modal">        
             <div class="card" style="border-color:{{$colors[$color_counter]}};" >
               <div class="card-body">
-                  <h5 class="heading">{{$group->name}}</h5>
+                  <h5 class="heading"><span><i class="{{$group->icon}} mr-2"></i></span>{{$group->name}}</h5>
                 <p></p>
               </div>
             </div>
@@ -111,7 +111,7 @@
                     @endphp    
                     <div class="card my-3" style="border-color:{{$colors[$color_counter_appsite]}};" >
                       <div class="card-body">
-                          <h5 class="heading">{{$appsite->name}}</h5>
+                        <span><i class="{{$appsite->icon}} mr-2"></i><h5 class="heading">{{$appsite->name}}</h5>
                       </div>
                     </div>
                   </a>
