@@ -25,26 +25,28 @@
   <!-- BIAYA -->
   <div class="container my-4">
     <div class="table-responsive">
-      <table class="table table-sm table-fixed">
-        <thead>
-          <tr>
-            <th scope="row" class="fixed-column bg-secondary" style="width: 250px;">PARAMETER</th>
-            @foreach($parameters as $parameter)
-              <th scope="col">{{ $parameter->unit->name}}</th>
-            @endforeach
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($param_points as $key => $param_point)
+      @if($parameters)
+        <table class="table table-sm table-fixed">
+          <thead>
             <tr>
-              <th scope="row" class="fixed-column bg-light-gray" >{{$param_point}}</th>
+              <th scope="row" class="fixed-column bg-secondary" style="width: 250px;">PARAMETER</th>
               @foreach($parameters as $parameter)
-                  <td scope="col">{{ $parameter->$key}}</td>
+                <th scope="col">{{ $parameter->unit->name}}</th>
               @endforeach
             </tr>
-          @endforeach
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @foreach($param_points as $key => $param_point)
+              <tr>
+                <th scope="row" class="fixed-column bg-light-gray" >{{$param_point}}</th>
+                @foreach($parameters as $parameter)
+                    <td scope="col">{{ $parameter->$key}}</td>
+                @endforeach
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      @endif
     </div>
   </div>
 
