@@ -57,13 +57,9 @@ class ParametersController extends Controller
 
         $parameters = $this->parameterService->getAllParameters()->data;
 
-        //determine connections
-        $connection = config('database.default');
-        $driver = config("database.connections.{$connection}.driver");
-       
         return view(
             "performance::frontend.$module_name.index",
-            compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "parameters",'driver')
+            compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "parameters")
         );
     }
 

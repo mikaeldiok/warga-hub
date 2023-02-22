@@ -85,7 +85,7 @@ class ParametersDataTable extends DataTable
     public function query()
     {
         $user = auth()->user();
-        $data = Parameter::query();
+        $data = Parameter::with('unit');
 
         return $this->applyScopes($data);
     }
@@ -132,9 +132,8 @@ class ParametersDataTable extends DataTable
                   ->printable(false)
                   ->addClass('text-center'),
             Column::make('id')->hidden(),
-            Column::make('photo')->title(__("performance::parameters.photo")),
-            Column::make('name')->title(__("performance::parameters.name")),
-            Column::make('parameter_id')->title(__("performance::parameters.parameter_id")),
+            Column::make('date')->title(__("performance::parameters.date")),
+            Column::make('unit.name')->title(__("data::units.name")),
             Column::make('available')->title(__("performance::parameters.available")),
             Column::make('created_at'),
             Column::make('updated_at')->hidden(),

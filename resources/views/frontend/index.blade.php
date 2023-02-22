@@ -72,6 +72,10 @@
     </div>
   </div>
 
+  <div class="container text-center my-4">
+    <a href="{{route('frontend.parameters.index')}}" type="button" class="btn btn-lg btn-o-primary">Primary</a>
+  </div>
+
   <div class="container">
     @php
       $color_counter = 0

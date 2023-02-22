@@ -2,9 +2,8 @@
 
 namespace Modules\Performance\Services;
 
-use Modules\Performance\Entities\Core;
 use Modules\Performance\Entities\Parameter;
-use Modules\Recruiter\Entities\Booking;
+use Modules\Data\Entities\Unit;
 
 use Exception;
 use Carbon\Carbon;
@@ -55,12 +54,17 @@ class ParameterService{
     
     public function getAllParameters(){
 
-        $parameter =Parameter::query()->available()->orderBy('id','desc')->get();
-        
+        $parameters =Parameter::join('units', 'parameters.unit_id', '=', 'units.id')
+                    ->where('parameters.available', true)
+                    ->orderBy('units.sequence', 'asc')
+                    ->select('parameters.*')
+                    ->with('unit')
+                    ->get();
+
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $parameter,
+            'data'=> $parameters,
         );
     }
 
@@ -379,9 +383,9 @@ class ParameterService{
 
     public static function prepareOptions(){
         
-        $opt = ["1","2","3","4","5","6","7","8","9"];
+        $units = Unit::pluck('name','id');
         $options = array(
-            'opt'         => $opt,
+            'units'         => $units,
         );
 
         return $options;

@@ -38,6 +38,11 @@ class Unit extends BaseModel
         return $this->hasMany('Modules\Data\Entities\Fee');
     }
 
+    public function parameters(){
+        return $this->hasMany('Modules\Performance\Entities\Parameter');
+    }
+
+
     public function getTotalStudentAttribute(){
         return $this->subunits->sum('students_count');
     }

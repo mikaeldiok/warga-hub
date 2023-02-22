@@ -1,11 +1,10 @@
 <?php
 
 return [
-
     'name'                      => 'Nama',
     'available'                 => 'Available',
     'unit_id'                   => 'Unit',
-    'date'                      => 'Date', 
+    'date'                      => 'Tanggal', 
     'p1'                        => "Occupancy Rate",
     'p2'                        => "Rasio peserta didik : pendidik",
     'p3'                        => "Jumlah peserta didik per rombel",
@@ -18,5 +17,5 @@ return [
     'p10'                       => "Penanganan tunggakan",
     'p11'                       => "Kebersihan dan pemeliharaan sekolah",
     'p12'                       => "Keaktifan kelola website dan medsos",
-    'p13'                       => "Sekolah keberlanjutan",
+    'p13'                       => "Sekolah keberlanjutan",      
 ];

@@ -38,5 +38,9 @@ class Parameter extends BaseModel
     public function isAvailable(){
         return $this->available;
     }
+
+    public function unit(){
+        return $this->belongsTo('Modules\Data\Entities\Unit');
+    }
 }
 
