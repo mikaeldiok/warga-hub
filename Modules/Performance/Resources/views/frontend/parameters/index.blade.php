@@ -20,7 +20,7 @@
 @section('content')
 <div class="section">
   <div class="container my-4">
-    <a href="/" type="button" class="btn btn-primary">Primary</a>
+    <a href="/" type="button" class="btn btn-primary">Home</a>
   </div>
   <!-- BIAYA -->
   <div class="container my-4">
@@ -28,7 +28,7 @@
       <table class="table table-sm table-fixed">
         <thead>
           <tr>
-            <th scope="row" class="fixed-column bg-secondary" >PARAMETER</th>
+            <th scope="row" class="fixed-column bg-secondary" style="width: 250px;">PARAMETER</th>
             @foreach($parameters as $parameter)
               <th scope="col">{{ $parameter->unit->name}}</th>
             @endforeach
@@ -37,7 +37,7 @@
         <tbody>
           @foreach($param_points as $key => $param_point)
             <tr>
-              <th scope="row" class="fixed-column bg-light-gray" style="width: auto;">{{$param_point}}</th>
+              <th scope="row" class="fixed-column bg-light-gray" >{{$param_point}}</th>
               @foreach($parameters as $parameter)
                   <td scope="col">{{ $parameter->$key}}</td>
               @endforeach

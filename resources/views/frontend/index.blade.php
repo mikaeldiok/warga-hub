@@ -73,7 +73,14 @@
   </div>
 
   <div class="container text-center my-4">
-    <a href="{{route('frontend.parameters.index')}}" type="button" class="btn btn-lg btn-o-primary">Primary</a>
+    <a href="{{route('frontend.parameters.index')}}" type="button" class="">
+      <div class="card" style="border-color:#FF00FF;border-width: medium;width:500px" >
+        <div class="card-body">
+            <h5 class="heading"></span>Performa Unit<span><i class="mx-2 fa-solid fa-chart-line"></i></span></h5>
+          <p></p>
+        </div>
+      </div>
+    </a>
   </div>
 
   <div class="container">
