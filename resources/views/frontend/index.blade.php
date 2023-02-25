@@ -17,7 +17,7 @@
 @endphp
 
 @section('content')
-<div class="section">
+<div class="">
   <div class="container my-3 text-center">
     <h1>WARGA HUB</h1>
   </div>
@@ -105,12 +105,10 @@
         <div id="{{$group->name}}_modal" class="modal fade">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
-              <!-- Header -->
               <div class="modal-header">
                 <h1>{{$group->name}}</h1>
               </div>
 
-              <!-- Body -->
               <div class="modal-body">
                 @php
                   $color_counter_appsite = 0
@@ -137,7 +135,6 @@
                 @endforeach
               </div>
 
-              <!-- Footer -->
               <div class="modal-footer modal-footer--mine">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
