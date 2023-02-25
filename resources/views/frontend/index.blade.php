@@ -18,13 +18,15 @@
 
 @section('content')
 <div class="section">
-
-  <div class="container my-4">
+  <div class="container my-3 text-center">
+    <h1>WARGA HUB</h1>
+  </div>
+  <div class="container my-3">
     <div class="row">
-      <div class="col-sm-6 mx-3 border rounded">
+      <div class="col-sm-6 m-3 p-2 border rounded">
         {!! $totalStudentChart->container() !!}
       </div>
-      <div class="col mx-3 border rounded">
+      <div class="col m-3 p-2 border rounded">
         {!! $teacherPerUnitChart->container() !!}
       </div>
     </div>
@@ -73,8 +75,8 @@
   </div>
 
   <div class="container text-center my-4">
-    <a href="{{route('frontend.parameters.index')}}" type="button" class="">
-      <div class="card" style="border-color:#FF00FF;border-width: medium;width:500px" >
+    <a href="{{route('frontend.parameters.index')}}" type="button btn-lg" class="">
+      <div class="card" style="border-color:#FF00FF;border-width: medium;" >
         <div class="card-body">
             <h5 class="heading"></span>Performa Unit<span><i class="mx-2 fa-solid fa-chart-line"></i></span></h5>
           <p></p>
@@ -89,7 +91,7 @@
     @endphp
     <div class="row dflex justify-content-center">
       @foreach($groups as $group)
-        <div class="col col-lg-5 my-2"  data-filter-item data-filter-name="{{$group->name}}">
+        <div class="col-6 col-lg-5 my-2"  data-filter-item data-filter-name="{{$group->name}}">
           <a href="#{{$group->name}}_modal" data-toggle="modal" data-target="#{{$group->name}}_modal">        
             <div class="card" style="border-color:{{$colors[$color_counter]}};" >
               <div class="card-body">
