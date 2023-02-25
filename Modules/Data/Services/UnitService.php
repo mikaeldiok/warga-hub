@@ -419,6 +419,11 @@ class UnitService{
                                     ],
                                 ];
                             })->toArray(),
+                            'label' => [
+                                'show' => true,
+                                'formatter' => '{b} {d}% ({c})',
+                                'position' => 'inside',
+                            ],
                         ],
                     ],
                     'tooltip' => [
@@ -484,6 +489,11 @@ class UnitService{
                             ],
                         ];
                     })->toArray(),
+                    'label' => [
+                        'show' => true,
+                        'formatter' => '{b} {d}% ({c})',
+                        'position' => 'inside',
+                    ],
                 ],
             ],
             'tooltip' => [
