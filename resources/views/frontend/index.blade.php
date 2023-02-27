@@ -77,36 +77,22 @@
         <thead>
           <tr>
             <th scope="col" class="fixed-column bg-light-gray">BIAYA</th>
-            @foreach($fees as $fee)
-              <th scope="col">{{ $fee->name_or_jurusan}}</th>
-            @endforeach
+            <th scope="row" class="fixed-column bg-light-gray">DP</th>
+            <th scope="row" class="fixed-column bg-light-gray">DPP</th>
+            <th scope="row" class="fixed-column bg-light-gray">SPP</th>
+            <th scope="row" class="fixed-column bg-light-gray">UP</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row" class="fixed-column bg-light-gray">DP</th>
-            @foreach($fees as $fee)
+          @foreach($fees as $fee)
+            <tr>
+              <th scope="row" class="fixed-column bg-light-gray">{{$fee->name_or_jurusan}}</th>
               <td scope="col">{{$fee->DP ? "Rp.".number_format($fee->DP,0,"",".") : ""}}</td>
-            @endforeach
-          </tr>
-          <tr>
-            <th scope="row" class="fixed-column bg-light-gray">DPP</th>
-            @foreach($fees as $fee)
               <td scope="col">{{$fee->DPP ? "Rp.".number_format($fee->DPP ,0,"",".") : ""}}</td>
-            @endforeach
-          </tr>
-          <tr>
-            <th scope="row" class="fixed-column bg-light-gray">SPP</th>
-            @foreach($fees as $fee)
               <td scope="col">{{$fee->SPP ? "Rp.".number_format($fee->SPP,0,"",".") : ""}}</td>
-            @endforeach
-          </tr>
-          <tr>
-            <th scope="row" class="fixed-column bg-light-gray">UP</th>
-            @foreach($fees as $fee)
               <td scope="col">{{$fee->UP ? "Rp.".number_format($fee->UP,0,"",".") : ""}}</td>
-            @endforeach
-          </tr>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
