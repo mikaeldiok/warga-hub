@@ -19,7 +19,7 @@
 @section('content')
 <div class="">
   <div class="container my-3 text-center">
-    <h1>WARGA HUB</h1>
+    <h1>Tahun Ajaran {{setting('tahun_ajaran')}} </h1>
   </div>
   <div class="container my-3">
     <div class="row">
@@ -34,7 +34,45 @@
 
   <!-- BIAYA -->
   <div class="container my-4">
+    <h2 class="text-center mb-4">Biaya Pendidikan Tahun Ajaran {{setting('tahun_ajaran')}}</h2>
     <div class="table-responsive">
+      <!-- <table class="table table-fixed">
+        <thead>
+          <tr>
+            <th scope="col" class="fixed-column bg-light-gray">BIAYA</th>
+            @foreach($fees as $fee)
+              <th scope="col">{{ $fee->name_or_jurusan}}</th>
+            @endforeach
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="fixed-column bg-light-gray">DP</th>
+            @foreach($fees as $fee)
+              <td scope="col">{{$fee->DP ? "Rp.".number_format($fee->DP,0,"",".") : ""}}</td>
+            @endforeach
+          </tr>
+          <tr>
+            <th scope="row" class="fixed-column bg-light-gray">DPP</th>
+            @foreach($fees as $fee)
+              <td scope="col">{{$fee->DPP ? "Rp.".number_format($fee->DPP ,0,"",".") : ""}}</td>
+            @endforeach
+          </tr>
+          <tr>
+            <th scope="row" class="fixed-column bg-light-gray">SPP</th>
+            @foreach($fees as $fee)
+              <td scope="col">{{$fee->SPP ? "Rp.".number_format($fee->SPP,0,"",".") : ""}}</td>
+            @endforeach
+          </tr>
+          <tr>
+            <th scope="row" class="fixed-column bg-light-gray">UP</th>
+            @foreach($fees as $fee)
+              <td scope="col">{{$fee->UP ? "Rp.".number_format($fee->UP,0,"",".") : ""}}</td>
+            @endforeach
+          </tr>
+        </tbody>
+      </table> -->
+
       <table class="table table-fixed">
         <thead>
           <tr>
@@ -78,7 +116,7 @@
     <a href="{{route('frontend.parameters.index')}}" type="button btn-lg" class="">
       <div class="card" style="border-color:#FF00FF;border-width: medium;" >
         <div class="card-body">
-            <h5 class="heading"></span>Performa Unit<span><i class="mx-2 fa-solid fa-chart-line"></i></span></h5>
+            <h1 class="heading"></span>Performa Unit<span><i class="mx-2 fa-solid fa-chart-line"></i></span></h1>
           <p></p>
         </div>
       </div>
@@ -122,7 +160,7 @@
                     @endphp    
                     <div class="card my-3" style="border-color:{{$colors[$color_counter_appsite]}};" >
                       <div class="card-body">
-                        <span><i class="{{$appsite->icon}} mr-2"></i><h5 class="heading">{{$appsite->name}}</h5>
+                        <h5 class="heading"><span><i class="{{$appsite->icon}} mr-2"></i>{{$appsite->name}}<span><i class="fa-solid fa-arrow-right ml-2"></i></span></h5>
                       </div>
                     </div>
                   </a>

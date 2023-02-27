@@ -404,7 +404,7 @@ class UnitService{
 
         $chart->options([
                     'title' => [
-                        'text' => 'Murid Tiap Unit',
+                        'text' => 'Jumlah Peserta Didik / Mahasiswa',
                         'left' => 'center',
                     ],
                     'series' => [
@@ -469,7 +469,7 @@ class UnitService{
 
         $chart->options([
             'title' => [
-                'text' => 'Guru, Dosen, Tendik',
+                'text' => 'Jumlah Guru, Dosen, dan Tendik',
                 'left' => 'center',
             ],
             'series' => [
