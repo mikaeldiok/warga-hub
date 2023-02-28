@@ -32,7 +32,7 @@
               <th scope="row" class="fixed-column bg-secondary" style="width: 250px;">PARAMETER</th>
               @foreach($parameters as $parameter)
                 <th scope="col">{{ $parameter->unit->name}}
-                  <small>{{\Carbon\Carbon::parse($parameter->date)->format('d/m')}}</small>
+                  <small>{{\Carbon\Carbon::parse($parameter->date)->format('M Y')}}</small>
                 </th>
               @endforeach
             </tr>
