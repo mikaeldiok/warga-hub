@@ -23,7 +23,7 @@
   </div>
   <div class="container my-3">
     <div class="row">
-      <div class="col-sm-6 m-3 p-2 border rounded">
+      <div class="col m-3 p-2 border rounded">
         {!! $totalStudentChart->container() !!}
       </div>
       <div class="col m-3 p-2 border rounded">
@@ -115,11 +115,11 @@
     @endphp
     <div class="row dflex justify-content-center">
       @foreach($groups as $group)
-        <div class="col-6 col-lg-5 my-2"  data-filter-item data-filter-name="{{$group->name}}">
+        <div class="col-6 col-lg-6 my-2"  data-filter-item data-filter-name="{{$group->name}}">
           <a href="#{{$group->name}}_modal" data-toggle="modal" data-target="#{{$group->name}}_modal">        
             <div class="card" style="border-color:{{$colors[$color_counter]}};" >
               <div class="card-body">
-                  <h5 class="heading"><span><i class="{{$group->icon}} mr-2"></i></span>{{$group->name}}</h5>
+                  <h3 class="heading"><span><i class="{{$group->icon}} mr-2"></i></span>{{$group->name}}</h3>
                 <p></p>
               </div>
             </div>
