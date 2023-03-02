@@ -40,7 +40,7 @@ class Group extends BaseModel
     }
 
     public function appsites(){
-        return $this->hasMany('Modules\System\Entities\Appsite');
+        return $this->hasMany('Modules\System\Entities\Appsite')->orderBy('priority', 'asc');
     }
 }
 
