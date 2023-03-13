@@ -32,6 +32,9 @@
 
 <body>
 
+    <audio autoplay loop>
+        <source src="{{ asset('audio/mars.mp3') }}" type="audio/mpeg">
+    </audio>
     @include('frontend.includes.header')
 
     <!-- <x-preloader /> -->

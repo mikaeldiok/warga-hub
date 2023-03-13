@@ -34,7 +34,6 @@
     
 </head>
 <body class="c-app">
-
     <!-- Sidebar -->
     @include('backend.includes.sidebar')
     <!-- /Sidebar -->
