@@ -11,7 +11,7 @@
           <div class="d-md-block d-lg-none nav-link">
             <img class="rounded-circle img-fluid float-left mx-2" src="{{asset(Auth::user()->avatar)}}" alt="Photo" height="30px" width="30px">
             <spans style="font-size:20px">
-              Hi, {{Auth::user()->first_name}} !
+              {{Auth::user()->first_name}}
             </span> 
             <ul class="nav-item">
               @if(!Auth::user()->hasRole("user"))
@@ -36,7 +36,7 @@
               <a class="dropdown-toggle nav-button" role="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img class="rounded-circle img-fluid float-left mx-2" src="{{asset(Auth::user()->avatar)}}" alt="Photo" height="30px" width="30px">
                   <spans style="font-size:20px">
-                    Hi, {{Str::limit(Auth::user()->first_name,12)}} !
+                    {{Str::limit(Auth::user()->first_name,12)}}
                   </span> 
               </a>
 

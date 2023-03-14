@@ -32,9 +32,9 @@
 
 <body>
 
-    <audio autoplay loop>
-        <source src="{{ asset('audio/mars.mp3') }}" type="audio/mpeg">
-    </audio>
+    <audio autoplay id="audioplayer" src="{{ asset('audio/mars.mp3') }}" type="audio/mpeg" loop="loop"> </audio>
+
+    
     @include('frontend.includes.header')
 
     <!-- <x-preloader /> -->
@@ -63,5 +63,4 @@
     <link rel="stylesheet" href="/css/bootstrap-multiselect.css" type="text/css"/>
 
 @stack('after-scripts')
-
 </html>
