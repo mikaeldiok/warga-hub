@@ -32,8 +32,9 @@
 
 <body>
 
-    <audio autoplay id="audioplayer" src="{{ asset('audio/mars.mp3') }}" type="audio/mpeg" loop="loop"> </audio>
-
+    <audio autoplay id="myAudio" loop preload="auto">
+        <source src="{{ asset('audio/mars.mp3') }}" type="audio/mpeg">
+    </audio>
     
     @include('frontend.includes.header')
 
@@ -63,4 +64,16 @@
     <link rel="stylesheet" href="/css/bootstrap-multiselect.css" type="text/css"/>
 
 @stack('after-scripts')
+<script>
+    var audio = document.getElementById("myAudio");
+
+    window.onscroll = function() {
+        // Check if the user has scrolled to a certain point on the page
+        if (window.pageYOffset > 500) {
+            // Unmute and play the audio
+            audio.muted = false;
+            audio.play();
+        }
+    };
+</script>
 </html>
