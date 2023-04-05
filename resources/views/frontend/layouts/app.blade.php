@@ -32,9 +32,9 @@
 
 <body>
 
-    <audio autoplay id="myAudio" loop preload="auto">
+    <!-- <audio autoplay id="myAudio" loop preload="auto">
         <source src="{{ asset('audio/mars.mp3') }}" type="audio/mpeg">
-    </audio>
+    </audio> -->
     
     @include('frontend.includes.header')
 
