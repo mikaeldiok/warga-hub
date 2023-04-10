@@ -44,7 +44,7 @@ class ParametersController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -55,11 +55,12 @@ class ParametersController extends Controller
 
         $module_action = 'Index';
 
-        $parameters = $this->parameterService->getAllParameters()->data;
+        $datetime = $request->input('datetime');
+        $parameters = $this->parameterService->getAllParameters($request)->data;
 
         return view(
             "performance::frontend.$module_name.index",
-            compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "parameters")
+            compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "parameters", "datetime")
         );
     }
 

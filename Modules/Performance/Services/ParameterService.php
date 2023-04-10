@@ -52,19 +52,32 @@ class ParameterService{
         );
     }
     
-    public function getAllParameters(){
+    public function getAllParameters(Request $request){
 
         $parameters =Parameter::join('units', 'parameters.unit_id', '=', 'units.id')
-                    ->where('parameters.available', true)
                     ->orderBy('units.sequence', 'asc')
                     ->select('parameters.*')
-                    ->with('unit')
-                    ->get();
+                    ->with('unit');
+
+        $datetime = $request->input('datetime');
+
+        if(isset($datetime)){
+            \Log::debug('inside : '.$datetime);
+            $trueDate = \Carbon\Carbon::createFromFormat('M/Y', $datetime);
+            \Log::debug('inside : '.$trueDate);
+
+            $response = $parameters->whereYear('parameters.date', '=', $trueDate->year)
+                                    ->whereMonth('parameters.date', '=', $trueDate->month)
+                                    ->get();
+        }else{
+            $response = $parameters->where('parameters.available', true)->get();
+        }
+
 
         return (object) array(
             'error'=> false,            
             'message'=> '',
-            'data'=> $parameters,
+            'data'=> $response,
         );
     }
 
