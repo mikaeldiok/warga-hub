@@ -34,6 +34,7 @@ Route::group(['namespace' => '\Modules\Performance\Http\Controllers\Frontend', '
     $module_name = 'parameters';
     $controller_name = 'ParametersController';    
     Route::get("$module_name/show", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
+    Route::get("$module_name/download", ['as' => "$module_name.download", 'uses' => "$controller_name@download"]);
     Route::get("$module_name/catalog/filter", ['as' => "$module_name.filterParameters", 'uses' => "$controller_name@filterParameters"]);
     Route::get("$module_name/{id}-{parameterId}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
 });

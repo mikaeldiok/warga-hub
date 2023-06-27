@@ -22,6 +22,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
 use Modules\Performance\Imports\ParametersImport;
+use Modules\Performance\Exports\ParametersExport;
 use Modules\Performance\Events\ParameterRegistered;
 
 use App\Events\Backend\UserCreated;
@@ -62,9 +63,7 @@ class ParameterService{
         $datetime = $request->input('datetime');
 
         if(isset($datetime)){
-            \Log::debug('inside : '.$datetime);
             $trueDate = \Carbon\Carbon::createFromFormat('M/Y', $datetime);
-            \Log::debug('inside : '.$trueDate);
 
             $response = $parameters->whereYear('parameters.date', '=', $trueDate->year)
                                     ->whereMonth('parameters.date', '=', $trueDate->month)
@@ -275,6 +274,10 @@ class ParameterService{
             'message'=> '',
             'data'=> $updated_parameter,
         );
+    }
+
+    public function download($request){
+        return Excel::download(new ParametersExport, 'parameters-export.xlsx');
     }
 
     public function destroy($id){
