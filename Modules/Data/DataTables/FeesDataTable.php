@@ -113,6 +113,7 @@ class FeesDataTable extends DataTable
                   ->printable(false)
                   ->addClass('text-center'),
             Column::make('name_or_jurusan'),
+            Column::make('SPM'),
             Column::make('SPP'),
             Column::make('DPP'),
             Column::make('DP'),

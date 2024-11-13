@@ -9,6 +9,7 @@ return [
     'staff_count'               => 'Jumlah Staff',
     'DPP'                       => 'DPP',
     'DP'                        => 'DP',
+    'SPM'                       => 'SPM',
     'SPP'                       => 'SPP',
-    'UP'                        => 'UP', 
+    'UP'                        => 'UP',
 ];

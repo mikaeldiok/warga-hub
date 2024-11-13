@@ -77,20 +77,16 @@
         <thead>
           <tr>
             <th scope="col" class="fixed-column bg-light-gray">BIAYA</th>
-            <th scope="row" class="fixed-column bg-light-gray">DP</th>
-            <th scope="row" class="fixed-column bg-light-gray">DPP</th>
             <th scope="row" class="fixed-column bg-light-gray">SPP</th>
-            <th scope="row" class="fixed-column bg-light-gray">UP</th>
+            <th scope="row" class="fixed-column bg-light-gray">SPM</th>
           </tr>
         </thead>
         <tbody>
           @foreach($fees as $fee)
             <tr>
               <th scope="row" class="fixed-column bg-light-gray">{{$fee->name_or_jurusan}}</th>
-              <td scope="col">{{$fee->DP ? "Rp.".number_format($fee->DP,0,"",".") : ""}}</td>
-              <td scope="col">{{$fee->DPP ? "Rp.".number_format($fee->DPP ,0,"",".") : ""}}</td>
               <td scope="col">{{$fee->SPP ? "Rp.".number_format($fee->SPP,0,"",".") : ""}}</td>
-              <td scope="col">{{$fee->UP ? "Rp.".number_format($fee->UP,0,"",".") : ""}}</td>
+              <td scope="col">{{$fee->SPM ? "Rp.".number_format($fee->SPM,0,"",".") : ""}}</td>
             </tr>
           @endforeach
         </tbody>
@@ -116,7 +112,7 @@
     <div class="row dflex justify-content-center">
       @foreach($groups as $group)
         <div class="col-6 col-lg-6 my-2"  data-filter-item data-filter-name="{{$group->name}}">
-          <a href="#{{$group->name}}_modal" data-toggle="modal" data-target="#{{$group->name}}_modal">        
+          <a href="#{{$group->name}}_modal" data-toggle="modal" data-target="#{{$group->name}}_modal">
             <div class="card" style="border-color:{{$colors[$color_counter]}};" >
               <div class="card-body">
                   <h3 class="heading"><span><i class="{{$group->icon}} mr-2"></i></span>{{$group->name}}</h3>
@@ -138,12 +134,12 @@
                   $color_counter_appsite = 0
                 @endphp
                 @foreach($group->appsites as $appsite)
-                  <a href="{{$appsite->url}}">    
-                    
+                  <a href="{{$appsite->url}}">
+
                     @php
                       if(!array_key_exists($color_counter_appsite,$colors))
                         $color_counter_appsite = 0;
-                    @endphp    
+                    @endphp
                     <div class="card my-3" style="border-color:{{$colors[$color_counter_appsite]}};" >
                       <div class="card-body">
                         <h5 class="heading"><span><i class="{{$appsite->icon}} mr-2"></i>{{$appsite->name}}<span><i class="fa-solid fa-arrow-right ml-2"></i></span></h5>
@@ -188,7 +184,7 @@
   .hidden {
     display: none;
   }
- 
+
   .table-fixed th.fixed-column,
   .table-fixed td.fixed-column {
     position: sticky;

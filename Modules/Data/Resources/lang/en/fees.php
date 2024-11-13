@@ -10,5 +10,6 @@ return [
     'DPP'                       => 'DPP',
     'DP'                        => 'DP',
     'SPP'                       => 'SPP',
+    'SPM'                       => 'SPM',
     'UP'                        => 'UP',
 ];

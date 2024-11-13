@@ -1,0 +1,13 @@
+{
+    "i18n-ally.localesPaths": [
+        "resources/lang",
+        "Modules/Article/Resources/lang",
+        "Modules/Comment/Resources/lang",
+        "Modules/Core/Resources/lang",
+        "Modules/Data/Resources/lang",
+        "Modules/Mkstarter/Resources/lang",
+        "Modules/Performance/Resources/lang",
+        "Modules/System/Resources/lang",
+        "Modules/Tag/Resources/lang"
+    ]
+}
